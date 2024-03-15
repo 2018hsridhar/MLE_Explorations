@@ -2,6 +2,11 @@
 Creating mock template code for a video recommendation system
 Will copy-paste code for later and share via e-mails
 
+
+ML Models Delved into : 
+1. MF - Matrix Factorization
+2. TTNN - Two Towers Neural Network ( category : Deep Learning ).
+
 '''
 
 '''
