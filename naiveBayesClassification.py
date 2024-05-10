@@ -29,10 +29,9 @@ Customer promotions are Gaussian-model based ; not Spam ( Bernoulli ) or Article
 
 Need to calculate likeliehoods for categorial and numerical information
 
-
-
-Assignment Goal : 
-1. Leverage the Scikit-Learn library to set up NBC : Naive-Bayes Classifier
+Assignment One Goal : 
+1. Leverage the Scikit-Learn library to set up NBC : Naive-Bayes Classifier.
+    - but what should our NBC even do?
 2. Set up feature hashing, stop words, and n-grams
 3. Ensure the original input data is Gaussian -> to use Gaussian likeliehoods. Do not use data with Power Distributions.
 4. Use Scikit KDE - Kernel Density Estimation - to estimate a dataset's probability distriubtion.
@@ -42,8 +41,27 @@ Larger Docs with NBC
 
 Eliminate vocabulary : set up feature hashing.
 
+Assignment Two Goal :
+1. Set up a classifier, using whichever desired approach, for document classification.
+
+
+
+
 
 '''
+
+'''
+Replace with scikit later?
+Vectorize features
+Coded with just one hash function in mind -> can extend to a one-bit second hash func to reduce collisions.
+'''
+def featureHashing(features : List[string], n:int):
+    featureVecLen = 100
+    featureHashVec = [0 for i in range(featureVecLen)]
+    for feature in features:
+        featureHash := hash(f) % featureVecLen
+        featureHashVec[featureHash] += 1
+    return featureHashVec
 
 '''
 Compute means and stdDevs for each feature ( f1,...,fm) for each data point (d1,...,dn)
