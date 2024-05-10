@@ -8,7 +8,14 @@ Links :
 
 
 
-
+Setting up Pythonic Naive Bayes Classification.
+Let's explore how to evolve and iterate on a classificier from two class ( binomial ) to multi class.
+We'll also explore the methods of TF ( Total Frequency ), IDF ( Inverse Document Frequency ), and TF-IDF ( which combines the two as a product ).
+Lastly, we'll also explore vectorization of counts based on a vocabulary of words, and representing non-mathematical inputs more mathematically.
+Links : 
+1. https://www.opinosis-analytics.com/knowledge-base/term-frequency-explained/#:~:text=Term%20frequency%20(TF)%20means%20how,about%20how%20you%20define%20it.
+Good canon case studies :
+1. UberEats Market Campaigns -> targeting users : can we make non-Habitual Users Habitual Users, following a promitions campaign? Do we have to promote to a massive user base, or a cohort group only?
 
 '''
 
