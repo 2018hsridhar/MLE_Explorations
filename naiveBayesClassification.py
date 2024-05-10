@@ -8,6 +8,8 @@ Links :
 
 
 
+
+
 '''
 
 '''
@@ -42,7 +44,7 @@ def stopWordRemoval(stopWords:, doc:string) -> List[String]:
         if token not in stopWords:
     return stopWordsRemovedDoc
 
-def computeIFTDF(self, targetTerm: string, doc:string, docSet:[string]) -> int:
+def computeTFIDF(self, targetTerm: string, doc:string, docSet:[string]) -> int:
     tf = self.computeTermFrequency(targetTerm, doc)
     idf = self.computeInverseDocumentFrequency(targetTerm, docSet)
     return (tf * idf )
