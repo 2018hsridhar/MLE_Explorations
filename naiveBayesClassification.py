@@ -22,26 +22,31 @@ Good canon case studies :
 custVec(x) = [ srvcUsage(pastWeek), srvcUsage(pastMonth), avgSpendAmount ] 
 yearlyUsage not predictive enough
 
-Promotions are Gaussian-model based.
+Customer promotions are Gaussian-model based ; not Spam ( Bernoulli ) or Articles ( Multinomial ).
 
 '''
 
 '''
 Compute means and stdDevs for each feature ( f1,...,fm) for each data point (d1,...,dn)
 But why are these two summary stats crucial?
+Note : for GTL assignation -> how do we even store this information?
+Filter and compute summStats for specific labels or class Types.
 '''
 def computeMeansAndStdDeviationsOfFeatureVectors(self, dataPoints: List[int], targetClassLabel:int) -> List[List[int]]:
-    n = len(dataPoints[0])
-    averages = [0 for i in range(n)]
-    stdDevs = [0 for i in range(n)]
+    featureSpaceSize = len(dataPoints[0]) - 1
+    sums = [0 for i in range(featureSpaceSize)]
+    averages = [0 for i in range(featureSpaceSize)]
+    stdDevs = [0 for i in range(featureSpaceSize)]
+    numDataPoints = len(dataPoints)
     for dataPoint in dataPoints:
         curClassLabel = dataPoint[0]
         if(curClassLabel == targetClassLabel):
-
-    
-            
-    return [[averages, stdDevs]]
-        
+            for index, featureVal in enumerate(dataPoint[1:]):
+                sums[index] += featureVal
+    for i in range(len(featureSpaceSize)):
+        averages[i] = sums[i] / numDataPoints
+        stdDevs[i] = self.computeStdDev(sums[i], averages[i], numDataPoints - 1)
+    return [[averages[1:], stdDevs[1:]]]        
 
 
 '''
