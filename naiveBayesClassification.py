@@ -18,11 +18,30 @@ Good canon case studies :
 1. UberEats Market Campaigns -> targeting users : can we make non-Habitual Users Habitual Users, following a promitions campaign? Do we have to promote to a massive user base, or a cohort group only?
 - maximize probability of conversions
 - collect billags : [ byMonth, byYear, averages ]
+- given a finite marketing budget ( $100,000 ), can we target just the specific cohort of potential conversions - and thus, maximize revenue?
+- model metric : number of converted users grows postDeployment
 
 custVec(x) = [ srvcUsage(pastWeek), srvcUsage(pastMonth), avgSpendAmount ] 
 yearlyUsage not predictive enough
 
 Customer promotions are Gaussian-model based ; not Spam ( Bernoulli ) or Articles ( Multinomial ).
+
+
+Need to calculate likeliehoods for categorial and numerical information
+
+
+
+Assignment Goal : 
+1. Leverage the Scikit-Learn library to set up NBC : Naive-Bayes Classifier
+2. Set up feature hashing, stop words, and n-grams
+3. Ensure the original input data is Gaussian -> to use Gaussian likeliehoods. Do not use data with Power Distributions.
+4. Use Scikit KDE - Kernel Density Estimation - to estimate a dataset's probability distriubtion.
+
+Larger Docs with NBC
+- multinomial likeliehood
+
+Eliminate vocabulary : set up feature hashing.
+
 
 '''
 
@@ -47,7 +66,6 @@ def computeMeansAndStdDeviationsOfFeatureVectors(self, dataPoints: List[int], ta
         averages[i] = sums[i] / numDataPoints
         stdDevs[i] = self.computeStdDev(sums[i], averages[i], numDataPoints - 1)
     return [[averages[1:], stdDevs[1:]]]        
-
 
 '''
 Normalization method : less systematic bias from longer documents.
