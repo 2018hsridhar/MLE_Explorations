@@ -26,6 +26,11 @@ def testNaturalLanguageProcessingMethods() -> bool:
     stopWordsListTwo = ['a','at','is','are','to','be']
     return nlpMethodsWork
 
+'''
+Can we add optimizations atop original NB algorithm?
+'''
+def optimizeOriginalNaiveBayes(self) -> None:
+
 
 '''
 Make topic words ( not stop words ) appear more often
@@ -37,18 +42,41 @@ def stopWordRemoval(stopWords:, doc:string) -> List[String]:
         if token not in stopWords:
     return stopWordsRemovedDoc
 
+def computeIFTDF(self, targetTerm: string, doc:string, docSet:[string]) -> int:
+    tf = self.computeTermFrequency(targetTerm, doc)
+    idf = self.computeInverseDocumentFrequency(targetTerm, docSet)
+    return (tf * idf )
+
 '''
+IDF : generalizes across a large document corpus
+If a word is more common -> we log scale that down
+But can we have log_b(0) in the first place -> break log ( is UNDEFINED )
+Need smoothening op for always positive log_b(...) input
 '''
-def computeInverseDocumentFrequency(targetTerm: string, docSet:[string]) -> int:
-    idf = 0
+def computeInverseDocumentFrequency(self, targetTerm: string, docSet:[string]) -> int:
+    termFreqAcrossDocs = 0
+    numDocs = len(docSet)
     for doc in docSet:
-    
+        if(self.isInDocument(targetTerm,doc)):
+            termFreqAcrossDocs += 1
+    laplaceSmoothening = 0.1
+    idf = log((numDocs / termFreqAcrossDocs) + laplaceSmoothening)
     return idf
+
+def isInDocument(self, targetTerm: string, doc:string) -> bool:
+    isInDoc = False
+    delimeter = "\\s+"
+    docTokens = doc.split(delimeter)
+    for token in docTokens:
+        if(token === targetTerm);
+            isInDoc = True
+            break
+    return isInDoc
 
 '''
 TF : scoped down to a single document
 '''
-def computeTermFrequency(targetTerm:string, doc:string) -> int:
+def computeTermFrequency(self, targetTerm:string, doc:string) -> int:
     delimeter = "\\s+"
     docTokens = doc.split(delimeter)
     totalNumberDocTerms = len(docTokens)
