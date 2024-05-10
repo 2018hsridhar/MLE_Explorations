@@ -16,8 +16,33 @@ Links :
 1. https://www.opinosis-analytics.com/knowledge-base/term-frequency-explained/#:~:text=Term%20frequency%20(TF)%20means%20how,about%20how%20you%20define%20it.
 Good canon case studies :
 1. UberEats Market Campaigns -> targeting users : can we make non-Habitual Users Habitual Users, following a promitions campaign? Do we have to promote to a massive user base, or a cohort group only?
+- maximize probability of conversions
+- collect billags : [ byMonth, byYear, averages ]
+
+custVec(x) = [ srvcUsage(pastWeek), srvcUsage(pastMonth), avgSpendAmount ] 
+yearlyUsage not predictive enough
+
+Promotions are Gaussian-model based.
 
 '''
+
+'''
+Compute means and stdDevs for each feature ( f1,...,fm) for each data point (d1,...,dn)
+But why are these two summary stats crucial?
+'''
+def computeMeansAndStdDeviationsOfFeatureVectors(self, dataPoints: List[int], targetClassLabel:int) -> List[List[int]]:
+    n = len(dataPoints[0])
+    averages = [0 for i in range(n)]
+    stdDevs = [0 for i in range(n)]
+    for dataPoint in dataPoints:
+        curClassLabel = dataPoint[0]
+        if(curClassLabel == targetClassLabel):
+
+    
+            
+    return [[averages, stdDevs]]
+        
+
 
 '''
 Normalization method : less systematic bias from longer documents.
@@ -94,4 +119,3 @@ def computeTermFrequency(self, targetTerm:string, doc:string) -> int:
         if token == targetTerm:
             targetTermFreq += 1
     return (targetTermFreq / totalNumberDocTerms)
-
