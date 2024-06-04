@@ -49,7 +49,8 @@
 ----------------------
 --- Book Resources ---
 ----------------------
-1. #TODO
-2.
-3.
-4. 
+1. Designing Machine Learning Systems : An Iterative Process for Production-Ready Applications ( Chip Hyugen ) ( O'Reilly )
+2. 
+3. 
+4.
+5. 
