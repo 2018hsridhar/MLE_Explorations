@@ -3,9 +3,10 @@
 ----------------------
 --- A Brief Primer ---
 ----------------------
-Exploring Machine Learning Engineering ( MLE ) and diving into my own ventures into the realm of machine learning : a subset of computer science.
-Wherein machine learning focuses on implicit learning : how to find patterns in datasets without explicitly instructive machines programatically how to do so.
-We'll explore a broad array of techniques - working with labeled data ( supervised learning ), with unlabeled data ( unsupervised learning ) and training agents in an interactive environment ( reinforcement learning ).
+1. Exploring Machine Learning Engineering ( MLE ) and diving into my own ventures into the realm of machine learning : a subset of computer science.
+2. Wherein machine learning focuses on implicit learning : how to find patterns in datasets without explicitly instructive machines programatically how to do so.
+3. We'll explore a broad array of techniques - working with labeled data ( supervised learning ), with unlabeled data ( unsupervised learning ) and training agents in an interactive environment ( reinforcement learning ).
+4. We'll also explore common case studies and working with different tasks on top of each type of ML approach.
 
 -----------------------
 --- Common Datasets ---
