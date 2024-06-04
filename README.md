@@ -12,25 +12,24 @@
 --- A List of ML Models ---
 ---------------------------
 1. Supervised Learning
-  a. knn : k-nearest neighbors.
-  b. kMeans : I think a clustering approach?
-  c. linear regression
-  d. logistic regression
-  e. multivariate regression
-  f. SVM : support vector machines
+  1. knn : k-nearest neighbors.
+  2. kMeans : I think a clustering approach?
+  3. linear regression
+  4. logistic regression
+  5. multivariate regression
+  6. SVM : support vector machines
 2. Unsupervised Learning :
-  g. ANN : artificiant neural networks
+  1. ANN : artificiant neural networks
     1. CNN : Convolutional Neural Networks
     2. RNN : Recurrent Neural Networks
-      a. GRU
-      b. LSTM
-      c. ChatGPT-esque
-  h. Clustering
-  i. Association
-  j. Dimensionality Reduction
+      1. GRU
+      2. LSTM
+      3. ChatGPT-esque
+  2. Clustering
+  3. Association
+  4. Dimensionality Reduction
 4. Reinforcement Learning :
-  a. #TODO
-  b.
+  1. #TODO
 
 -----------------------
 --- Common Datasets ---
