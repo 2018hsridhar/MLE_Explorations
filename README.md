@@ -30,6 +30,7 @@
   2. Clustering
   3. Association
   4. Dimensionality Reduction
+  5. PCA : Principal Component Analysis
 4. Reinforcement Learning :
   1. #TODO
 
