@@ -40,6 +40,12 @@
 2. Kaggle ( volume and community )
 3. Online projects and blogs.
 
+-----------------------------------------
+--- Deployment Pipelines and Diagrams ---
+-----------------------------------------
+We'll also review deployment strategies of ML models, in both pre-production envs and production envs.
+Deployment entails complexity since we have to go through multiple steps : model ( development, training, testing, and validation )
+
 -------------------------
 --- Website Resources ---
 -------------------------
