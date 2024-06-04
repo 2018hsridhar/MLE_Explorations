@@ -12,12 +12,14 @@
 --- A List of ML Models ---
 ---------------------------
 1. Supervised Learning
-  1. knn : k-nearest neighbors.
-  2. kMeans : I think a clustering approach?
-  3. linear regression
-  4. logistic regression
-  5. multivariate regression
-  6. SVM : support vector machines
+   1. Classification
+    1. knn : k-nearest neighbors.
+    2. kMeans : I think a clustering approach?
+    3. SVM : support vector machines
+  2. Regression
+    1. linear regression
+    2. logistic regression
+    3. multivariate regression 
 2. Unsupervised Learning :
   1. ANN : artificiant neural networks
     1. CNN : Convolutional Neural Networks
