@@ -17,36 +17,42 @@ WOOOH!!!
 import numpy as np
 import pandas as pd
 
-def get_features(df_houses):
-    # [1] Execute imputation of averages : skip the NA cols 
+# [1] Execute imputation of averages : skip the NA cols 
+def impute(df):
     toImputeCols = ['tax_liability','land_value','avg_bath_sqft','avg_room_sqft']
     for toImpute in toImputeCols:
-        avg_to_impute = df_houses[toImpute].mean(skipna=True)
-        df_houses[toImpute] = df_houses[toImpute].fillna(avg_to_impute)
-    
-    # [2] one-hot encode two columns
-    # Needed for feature eng : accuracy of ML models
-    # OHE : avoid ordering ( with single numbers ) -> but columnar expansion of dataframe :-(
-    # Issue : Vectorization of a column enlargens datasets -> sparsity
-    # choice of n = 10/20 : focus on key categories -> all else other -> dodge sparseness
-    # Expect slower training with OHE ( curseOfDim ) 
+        avg_to_impute = df[toImpute].mean(skipna=True)
+        df[toImpute] = df[toImpute].fillna(avg_to_impute)
+
+# [2] one-hot encode two columns
+# Needed for feature eng : accuracy of ML models
+# OHE : avoid ordering ( with single numbers ) -> but columnar expansion of dataframe :-(
+# Issue : Vectorization of a column enlargens datasets -> sparsity
+# choice of n = 10/20 : focus on key categories -> all else other -> dodge sparseness
+# Expect slower training with OHE ( curseOfDim ) 
+def ohe(df):
     years = [2007,2008,2009]
     yearStr = ['2007','2008','2009']
     for idx in range(len(years)):
-        df_houses[yearStr[idx]] = np.where(df_houses['year'] == years[idx], 1, 0)
-    myLocations = df_houses['location'].sort_values()
-    unique_locations_list = list(myLocations.unique())
+        df[yearStr[idx]] = np.where(df['year'] == years[idx], 1, 0)
+    unique_locations_list = list(df['location'].unique())
+    unique_locations_list.sort()
     for uniqlocation in unique_locations_list:
-        df_houses[uniqlocation] = np.where(df_houses['location'] == uniqlocation,1,0)
-    df_houses.drop(columns=['year','location'],inplace=True)
+        df[uniqlocation] = np.where(df['location'] == uniqlocation,1,0)
+    df.drop(columns=['year','location'],inplace=True)
 
-    # [3] Min-max scaling of columns
+# [3] Min-max scaling of columns
+def minMaxScale(df):
     targetCols = ['avg_room_sqft','avg_bath_sqft','land_value','tax_liability']
     for column in targetCols:
-        colMin = df_houses[column].min()
-        colMax = df_houses[column].max()
-        df_houses[column] = df_houses[column].apply(lambda x: ((x-colMin)/(colMax-colMin)))
-    
+        colMin = df[column].min()
+        colMax = df[column].max()
+        df[column] = df[column].apply(lambda x: ((x-colMin)/(colMax-colMin)))
+
+def get_features(df_houses):
+    impute(df_houses)
+    ohe(df_houses)
+    minMaxScale(df_houses)
     return df_houses
 
 
