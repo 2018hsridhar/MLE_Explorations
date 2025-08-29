@@ -1,0 +1,8 @@
+# Contains package names for commonly used ML algorithms
+kaggle
+numpy
+pandas
+scikit-learn
+matplotlib
+scipy
+jupyter
