@@ -15,12 +15,11 @@ from UTILS.DatasetLoader import DatasetLoader  # Import class from module
 from UTILS.DatasetPlotter import DatasetPlotter  # Import class from module
 import matplotlib.pyplot as plt
 
-
 def main():
 
     # # Download and unzip the dataset
     target_dataset = 'fedesoriano/electric-power-consumption'
-    target_path = "./data"
+    target_path = "./DATA"
 
     datasetLoader = DatasetLoader()
 
