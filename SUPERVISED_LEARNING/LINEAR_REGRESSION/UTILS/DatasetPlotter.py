@@ -9,6 +9,7 @@ class DatasetPlotter:
         self.RANDOM_STATE = 42
 
     def plotDataset(self, data: pd.DataFrame) -> None:
+        print(f"Entered method plotDataset()")
         # Use random sampling for better statistical analysis
         # RANDOM_STATE for reproducibility
         sampled_data = data.sample(n=self.SAMPLE_SIZE, random_state=self.RANDOM_STATE)
