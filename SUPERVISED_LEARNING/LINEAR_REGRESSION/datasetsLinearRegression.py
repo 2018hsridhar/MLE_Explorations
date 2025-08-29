@@ -10,24 +10,21 @@
 # Run script command
 # python datasetsLinearRegression.py
 
-
+# import as a class, not as a module
+from UTILS.DatasetLoader import DatasetLoader  # Import class from module
 from kaggle.api.kaggle_api_extended import KaggleApi
 import pandas as pd
 
-api = KaggleApi()
-api.authenticate()
+def main():
+    print("HERE")
 
-# Download and unzip the dataset
-target_dataset = 'fedesoriano/electric-power-consumption'
-target_path = "./data"
+    # # Download and unzip the dataset
+    target_dataset = 'fedesoriano/electric-power-consumption'
+    target_path = "./data"
 
-# Download latest version
-api.dataset_download_files(target_dataset,path=target_path,unzip=True)
+    datasetLoader = DatasetLoader()
 
-# Read the dataset
-DELIM = ';'
-df = pd.read_csv('./data/powerconsumption.csv',sep=DELIM)
-print(df.head())
+    data = datasetLoader.getDataset(target_path,target_dataset)
+    datasetLoader.print_dataset_summary_statistics(target_dataset,target_path,data)
 
-
-
+main()
