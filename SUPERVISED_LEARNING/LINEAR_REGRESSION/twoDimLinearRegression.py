@@ -11,22 +11,30 @@
 # python datasetsLinearRegression.py
 
 # import as a class, not as a module
-from UTILS.DatasetLoader import DatasetLoader  # Import class from module
-from UTILS.DatasetPlotter import DatasetPlotter  # Import class from module
-from UTILS.MockDataGenerator import MockDataGenerator  # Import class from module
+
+# Add the project root to Python path
+import sys
+import os
+sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..'))
+
+# Now use absolute imports
+from UTILS.DatasetLoader import DatasetLoader
+from UTILS.DatasetPlotter import DatasetPlotter
+from UTILS.MockDataGenerator import MockDataGenerator
 from UTILS.CentralizedLogger import get_logger
+
 import matplotlib.pyplot as plt
 import os
 
 # Create logs directory
-os.makedirs('logs', exist_ok=True)
+os.makedirs('LOGS', exist_ok=True)
 
 # Get centralized logger
 logger = get_logger(__name__)
 
-def main():
+def executeTwoDimLinearRegression():
 
-    logger.info("Starting ML Dataset analysis.")
+    logger.info(f"In function call executeTwoDimLinearRegression(): Starting ML Linear Regression Dataset analysis.")
 
     try:
         # # Download and unzip the dataset
@@ -41,7 +49,7 @@ def main():
         # datasetLoader.print_dataset_summary_statistics(target_daaset,target_path,data)
 
         # datasetPlotter.plotDataset(data)
-        num_samples = 100
+        NUM_SAMPLES = 100
         label_one = "celsiusAvgDailyTemps"
         label_two = "megaWattPowerDemand"
         # label_one = "Date Time"
@@ -51,11 +59,15 @@ def main():
         # datasetPlotter.plotDataset(mockData,label_one,label_two)
         # def plotDataset(self, data: pd.DataFrame, label_one:str, label_two:str) -> None:
     except Exception as e:
-        logger.error(f"Error occurred in main execution : {str(e)}", exc_info=True)
+        logger.error(f"Error occurred in executeTwoDimLinearRegression() execution : {str(e)}", exc_info=True)
         raise
 
 # Avoid other scripts from running
 # The classes/functions main method
 # This is a common Python idiom : scripts importable and executable
+
+def main():
+    executeTwoDimLinearRegression()
+
 if __name__ == "__main__":
     main()

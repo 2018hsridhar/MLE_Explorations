@@ -1,0 +1,8 @@
+# See what deleted files git knows about
+git ls-files --deleted
+
+# Remove specific deleted files from git tracking
+git rm $(git ls-files --deleted)
+
+# Commit the changes
+git commit -m "Remove deleted files from repository"
