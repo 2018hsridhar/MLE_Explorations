@@ -1,5 +1,21 @@
 # MLE_Explorations
 
+-----------------------
+--- Getting Started ---
+-----------------------
+# Create virtual environment
+python -m venv venv
+
+# Activate it (macOS)
+source venv/bin/activate
+
+# Install requirements
+pip install -r requirements.txt
+
+# Deactivate when done
+deactivate
+
+
 ----------------------
 --- A Brief Primer ---
 ----------------------
