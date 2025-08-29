@@ -14,30 +14,48 @@
 from UTILS.DatasetLoader import DatasetLoader  # Import class from module
 from UTILS.DatasetPlotter import DatasetPlotter  # Import class from module
 from UTILS.MockDataGenerator import MockDataGenerator  # Import class from module
+from UTILS.CentralizedLogger import get_logger
 import matplotlib.pyplot as plt
+import os
+
+# Create logs directory
+os.makedirs('logs', exist_ok=True)
+
+# Get centralized logger
+logger = get_logger(__name__)
 
 def main():
 
-    # # Download and unzip the dataset
-    target_dataset = 'fedesoriano/electric-power-consumption'
-    target_path = "./DATA"
+    logger.info("Starting ML Dataset analysis.")
 
-    datasetLoader = DatasetLoader()
-    datasetPlotter = DatasetPlotter()
-    mockDataGenerator = MockDataGenerator()
+    try:
+        # # Download and unzip the dataset
+        target_dataset = 'fedesoriano/electric-power-consumption'
+        target_path = "./DATA"
 
-    # data = datasetLoader.getDataset(target_path,target_dataset)
-    # datasetLoader.print_dataset_summary_statistics(target_daaset,target_path,data)
+        datasetLoader = DatasetLoader()
+        datasetPlotter = DatasetPlotter()
+        mockDataGenerator = MockDataGenerator()
 
-    # datasetPlotter.plotDataset(data)
-    num_samples = 100
-    label_one = "celsiusAvgDailyTemps"
-    label_two = "megaWattPowerDemand"
-    # label_one = "Date Time"
-    # label_two = "Power Zone One Consumption ( kilowatts)"
-    mockData = mockDataGenerator.generateTwoDimMockTimeSeriesData(num_samples=100, dimLabelOne=label_one, dimLabelTwo=label_two)
-    datasetLoader.print_dataset_summary_statistics("","",mockData)
-    # datasetPlotter.plotDataset(mockData,label_one,label_two)
-    # def plotDataset(self, data: pd.DataFrame, label_one:str, label_two:str) -> None:
+        # data = datasetLoader.getDataset(target_path,target_dataset)
+        # datasetLoader.print_dataset_summary_statistics(target_daaset,target_path,data)
 
-main()
+        # datasetPlotter.plotDataset(data)
+        num_samples = 100
+        label_one = "celsiusAvgDailyTemps"
+        label_two = "megaWattPowerDemand"
+        # label_one = "Date Time"
+        # label_two = "Power Zone One Consumption ( kilowatts)"
+        mockData = mockDataGenerator.generateTwoDimMockTimeSeriesData(num_samples=100, dimLabelOne=label_one, dimLabelTwo=label_two)
+        datasetLoader.print_dataset_summary_statistics("","",mockData)
+        # datasetPlotter.plotDataset(mockData,label_one,label_two)
+        # def plotDataset(self, data: pd.DataFrame, label_one:str, label_two:str) -> None:
+    except Exception as e:
+        logger.error(f"Error occurred in main execution : {str(e)}", exc_info=True)
+        raise
+
+# Avoid other scripts from running
+# The classes/functions main method
+# This is a common Python idiom : scripts importable and executable
+if __name__ == "__main__":
+    main()
