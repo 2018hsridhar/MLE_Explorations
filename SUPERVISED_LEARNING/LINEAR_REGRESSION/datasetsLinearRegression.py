@@ -13,6 +13,7 @@
 # import as a class, not as a module
 from UTILS.DatasetLoader import DatasetLoader  # Import class from module
 from UTILS.DatasetPlotter import DatasetPlotter  # Import class from module
+from UTILS.MockDataGenerator import MockDataGenerator  # Import class from module
 import matplotlib.pyplot as plt
 
 def main():
@@ -22,11 +23,21 @@ def main():
     target_path = "./DATA"
 
     datasetLoader = DatasetLoader()
-
-    data = datasetLoader.getDataset(target_path,target_dataset)
-    # datasetLoader.print_dataset_summary_statistics(target_dataset,target_path,data)
-
     datasetPlotter = DatasetPlotter()
-    datasetPlotter.plotDataset(data)
+    mockDataGenerator = MockDataGenerator()
+
+    # data = datasetLoader.getDataset(target_path,target_dataset)
+    # datasetLoader.print_dataset_summary_statistics(target_daaset,target_path,data)
+
+    # datasetPlotter.plotDataset(data)
+    num_samples = 100
+    label_one = "celsiusAvgDailyTemps"
+    label_two = "megaWattPowerDemand"
+    # label_one = "Date Time"
+    # label_two = "Power Zone One Consumption ( kilowatts)"
+    mockData = mockDataGenerator.generateTwoDimMockTimeSeriesData(num_samples=100, dimLabelOne=label_one, dimLabelTwo=label_two)
+    datasetLoader.print_dataset_summary_statistics("","",mockData)
+    # datasetPlotter.plotDataset(mockData,label_one,label_two)
+    # def plotDataset(self, data: pd.DataFrame, label_one:str, label_two:str) -> None:
 
 main()

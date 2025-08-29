@@ -1,7 +1,7 @@
 '''
-The word problem :::
+Case Study :
 
-California ISO : manages power supply of California
+California ISO : Manages California's Power Supply
 - route power to needing regions
 - predict power demands - in Megawatts - ahead in advance for regions
 - hypothesis : power demand rises in summer
