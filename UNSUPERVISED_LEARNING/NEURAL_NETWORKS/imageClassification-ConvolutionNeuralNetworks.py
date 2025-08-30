@@ -7,6 +7,7 @@ We'll also look into common image preprocessing steps : setting up a standardize
 import sys
 import os
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..'))
+sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..','..'))
 
 from UTILS.ImageDatasetLoader import ImageDatasetLoader
 from UTILS.CentralizedLogger import get_logger
@@ -43,5 +44,6 @@ def train_simple_cnn():
 def main():
     train_simple_cnn()
 
-if __name__ == "__main__":
-    main()
+main()
+# if __name__ == "__main__":
+#     main()
