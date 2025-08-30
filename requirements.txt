@@ -1,8 +1,34 @@
-# Contains package names for commonly used ML algorithms
-kaggle
-numpy
-pandas
-scikit-learn
-matplotlib
-scipy
-jupyter
+# Version constraints : compatibility and reproducible builds
+
+# Core Data Science & ML Libraries
+numpy>=1.21.0
+pandas>=1.3.0
+scikit-learn>=1.0.0
+scipy>=1.7.0
+
+# Deep Learning & Neural Networks
+tensorflow>=2.8.0
+# keras is now included with tensorflow, no separate install needed
+
+# Data Visualization
+matplotlib>=3.5.0
+seaborn>=0.11.0
+
+# Data Sources & APIs
+kaggle>=1.5.0
+
+# Image Processing
+pillow>=8.3.0
+
+# Development & Jupyter
+jupyter>=1.0.0
+notebook>=6.4.0
+
+# Logging
+loguru>=0.6.0
+
+# Optional: Additional ML/Data Tools
+# xgboost>=1.5.0
+# lightgbm>=3.3.0
+# plotly>=5.0.0
+# opencv-python>=4.5.0
