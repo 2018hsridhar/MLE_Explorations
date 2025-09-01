@@ -3,14 +3,23 @@
 -----------------------
 --- Getting Started ---
 -----------------------
+
+# Move to the working directory 
+
+cd ../MACHINE_LEARNING_ENGINEERING_SIDE_PROJECTS
 # Create virtual environment
 python -m venv venv
 
 # Activate it (macOS)
+# Keep dependencies isolatd
+# Then run your script with venv activated
 source venv/bin/activate
 
 # Install requirements
 pip install -r requirements.txt
+pip install -r kaggle
+pip install 
+pip install -r matplotlib
 
 # Deactivate when done
 deactivate
