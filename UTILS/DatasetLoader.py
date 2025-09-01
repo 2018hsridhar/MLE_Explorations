@@ -1,3 +1,8 @@
+# You need a virtual environment and the rest of that going on here 
+# IDK why
+# pip install kaggle
+# pip install pandas
+# pip install matplotlib
 from kaggle.api.kaggle_api_extended import KaggleApi
 import pandas as pd
 
