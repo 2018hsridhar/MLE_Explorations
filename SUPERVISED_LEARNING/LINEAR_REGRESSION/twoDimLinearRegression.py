@@ -43,6 +43,9 @@ os.makedirs('LOGS', exist_ok=True)
 logger = get_logger(__name__)
 
 R2_THRESHOLD = 0.8
+TEST_SIZE = 0.2
+RANDOM_STATE = 42
+NUM_SAMPLES = 100
 
 def executeTwoDimLinearRegression():
 
@@ -61,7 +64,6 @@ def executeTwoDimLinearRegression():
         # datasetLoader.print_dataset_summary_statistics(target_daaset,target_path,data)
 
         # datasetPlotter.plotDataset(data)
-        NUM_SAMPLES = 100
         label_one = "celsiusAvgDailyTemps"
         label_two = "megaWattPowerDemand"
         # label_one = "Date Time"
@@ -76,8 +78,6 @@ def executeTwoDimLinearRegression():
 
         X = mockData[label_one].values.reshape(-1, 1)
         Y = mockData[label_two].values.reshape(-1, 1)
-        TEST_SIZE = 0.2
-        RANDOM_STATE = 42
 
         X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=TEST_SIZE, random_state=RANDOM_STATE)
         linearModel.fit(X_train, Y_train)
