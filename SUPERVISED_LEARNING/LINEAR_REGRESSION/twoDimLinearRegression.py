@@ -15,6 +15,11 @@
 # Add the project root to Python path
 import sys
 import os
+from xml.parsers.expat import model
+
+import sklearn.metrics
+from sklearn.base import r2_score
+from sklearn.metrics import mean_absolute_error, mean_squared_error
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..'))
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..','..'))
 
@@ -26,6 +31,11 @@ from UTILS.CentralizedLogger import get_logger
 
 import matplotlib.pyplot as plt
 import os
+
+import numpy as np
+from sklearn.linear_model import LinearRegression
+from sklearn.model_selection import train_test_split
+from sklearn.svm import SVR
 
 # Create logs directory
 os.makedirs('LOGS', exist_ok=True)
@@ -56,9 +66,39 @@ def executeTwoDimLinearRegression():
         # label_one = "Date Time"
         # label_two = "Power Zone One Consumption ( kilowatts)"
         mockData = mockDataGenerator.generateTwoDimMockTimeSeriesData(num_samples=100, dimLabelOne=label_one, dimLabelTwo=label_two)
-        datasetLoader.print_dataset_summary_statistics("","",mockData)
+        # datasetLoader.print_dataset_summary_statistics("","",mockData)
         # datasetPlotter.plotDataset(mockData,label_one,label_two)
         # def plotDataset(self, data: pd.DataFrame, label_one:str, label_two:str) -> None:
+
+        # Create and fit the model
+        linearModel = LinearRegression(fit_intercept=True)
+
+        X = mockData[label_one].values.reshape(-1, 1)
+        Y = mockData[label_two].values.reshape(-1, 1)
+        TEST_SIZE = 0.2
+        RANDOM_STATE = 42
+
+        X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=TEST_SIZE, random_state=RANDOM_STATE)
+        linearModel.fit(X_train, Y_train)
+
+        predictions = linearModel.predict(TEST_X)
+
+        # Plot outputs
+        plt.scatter(X_train, Y_train, color='black')
+        plt.plot(X_train, predictions, color='blue', linewidth=3)
+        plt.xlabel(label_one)
+        plt.ylabel(label_two)
+        plt.title("Linear Regression Predictions")
+        plt.show()
+
+        # compute error between predictions ( y ) and actual Y_test ( y_hat )
+        mae = mean_absolute_error(Y_test, predictions)
+        mse = mean_squared_error(Y_test, predictions)
+        r2 = r2_score(Y_test, predictions)
+        logger.info(f"Mean Absolute Error: {mae}")
+        logger.info(f"Mean Squared Error: {mse}")
+        logger.info(f"R^2 Score: {r2}")
+
     except Exception as e:
         logger.error(f"Error occurred in executeTwoDimLinearRegression() execution : {str(e)}", exc_info=True)
         raise
