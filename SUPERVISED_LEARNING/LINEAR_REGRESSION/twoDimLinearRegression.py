@@ -18,8 +18,7 @@ import os
 from xml.parsers.expat import model
 
 import sklearn.metrics
-from sklearn.base import r2_score
-from sklearn.metrics import mean_absolute_error, mean_squared_error
+from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..'))
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..','..'))
 
@@ -42,6 +41,8 @@ os.makedirs('LOGS', exist_ok=True)
 
 # Get centralized logger
 logger = get_logger(__name__)
+
+R2_THRESHOLD = 0.8
 
 def executeTwoDimLinearRegression():
 
@@ -81,11 +82,11 @@ def executeTwoDimLinearRegression():
         X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=TEST_SIZE, random_state=RANDOM_STATE)
         linearModel.fit(X_train, Y_train)
 
-        predictions = linearModel.predict(TEST_X)
+        predictions = linearModel.predict(X_test)
 
         # Plot outputs
         plt.scatter(X_train, Y_train, color='black')
-        plt.plot(X_train, predictions, color='blue', linewidth=3)
+        plt.plot(X_test, predictions, color='blue', linewidth=3)
         plt.xlabel(label_one)
         plt.ylabel(label_two)
         plt.title("Linear Regression Predictions")
@@ -95,9 +96,12 @@ def executeTwoDimLinearRegression():
         mae = mean_absolute_error(Y_test, predictions)
         mse = mean_squared_error(Y_test, predictions)
         r2 = r2_score(Y_test, predictions)
-        logger.info(f"Mean Absolute Error: {mae}")
-        logger.info(f"Mean Squared Error: {mse}")
-        logger.info(f"R^2 Score: {r2}")
+        logger.info(f"Linear Regression : Mean Absolute Error: {mae}")
+        logger.info(f"Linear Regression : Mean Squared Error: {mse}")
+        logger.info(f"Linear Regression : R^2 Score: {r2}")
+
+        if(r2 <= R2_THRESHOLD):
+            logger.warning(f"R^2 Score is below threshold: {R2_THRESHOLD}")
 
     except Exception as e:
         logger.error(f"Error occurred in executeTwoDimLinearRegression() execution : {str(e)}", exc_info=True)
