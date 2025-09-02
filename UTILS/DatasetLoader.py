@@ -15,7 +15,7 @@ class DatasetLoader:
 
     def getDataset(self, target_path, target_dataset) -> pd.DataFrame:
         self.api.dataset_download_files(target_dataset, path=target_path, unzip=True)
-        df = pd.read_csv(f'{target_path}/powerconsumption.csv', sep=self.COMMA)
+        df = pd.read_csv(f'{target_path}/{target_dataset}.csv', sep=self.COMMA)
         return df
 
     def print_dataset_summary_statistics(self,target_dataset,target_path,df) -> None:
