@@ -42,3 +42,8 @@ ValueError: x and y must have same first dimension, but have shapes (80, 1) and 
 2025-09-01 21:12:37,985 - __main__ - INFO - twoDimLinearRegression.py:97 - Mean Absolute Error: 0.6901835342497906
 2025-09-01 21:12:37,985 - __main__ - INFO - twoDimLinearRegression.py:98 - Mean Squared Error: 0.7494144754114779
 2025-09-01 21:12:37,985 - __main__ - INFO - twoDimLinearRegression.py:99 - R^2 Score: -0.07006489727200682
+2025-09-01 21:14:44,842 - __main__ - INFO - twoDimLinearRegression.py:52 - In function call executeTwoDimLinearRegression(): Starting ML Linear Regression Dataset analysis.
+2025-09-01 21:14:57,267 - __main__ - INFO - twoDimLinearRegression.py:99 - Linear Regression : Mean Absolute Error: 0.829303108601648
+2025-09-01 21:14:57,268 - __main__ - INFO - twoDimLinearRegression.py:100 - Linear Regression : Mean Squared Error: 0.8732845960497141
+2025-09-01 21:14:57,268 - __main__ - INFO - twoDimLinearRegression.py:101 - Linear Regression : R^2 Score: -0.44213536021226885
+2025-09-01 21:14:57,268 - __main__ - WARNING - twoDimLinearRegression.py:104 - R^2 Score is below threshold: 0.8
