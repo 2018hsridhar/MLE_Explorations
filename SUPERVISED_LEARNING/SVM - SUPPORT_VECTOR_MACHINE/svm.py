@@ -1,0 +1,82 @@
+# Add the project root to Python path
+import sys
+import os
+from xml.parsers.expat import model
+
+import sklearn.metrics
+from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
+sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..'))
+sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..','..'))
+
+# Now use absolute imports
+from UTILS.DatasetLoader import DatasetLoader
+from UTILS.DatasetPlotter import DatasetPlotter
+from UTILS.MockDataGenerator import MockDataGenerator
+from UTILS.CentralizedLogger import get_logger
+
+import matplotlib.pyplot as plt
+import os
+
+import numpy as np
+from sklearn.linear_model import LinearRegression
+from sklearn.model_selection import train_test_split
+from sklearn.svm import SVR
+
+# Create logs directory
+os.makedirs('LOGS', exist_ok=True)
+
+# Get centralized logger
+logger = get_logger(__name__)
+
+R2_THRESHOLD = 0.8
+TEST_SIZE = 0.2
+RANDOM_STATE = 42
+NUM_SAMPLES = 100
+
+'''
+For SVMs and clear class distinction visualization with 100–200 points, you want small, well-separated datasets. On Kaggle, most datasets are much larger, but you can easily subsample or filter them. Here are some good options:
+
+Iris Dataset
+
+Kaggle: Iris Species
+Classic for SVMs, 150 points, 3 classes, 4 features.
+
+Let's get 2D plotting in
+'''
+def executeSupportVectorMachine():
+
+    logger.info(f"In function call executeSupportVectorMachine(): Starting ML Support Vector Machine Dataset analysis.")
+
+    try:
+        # Example: Download and load the Iris dataset from Kaggle using DatasetLoader
+        target_dataset = 'uciml/iris'  # Kaggle dataset identifier for Iris
+        target_path = "./DATA"
+
+        datasetLoader = DatasetLoader()
+        datasetPlotter = DatasetPlotter()
+        mockDataGenerator = MockDataGenerator()
+
+        # Download and load the Iris dataset
+        proper_name = "Iris.csv"
+        iris_data = datasetLoader.getDataset(target_path, target_dataset)
+        # Optionally print summary statistics
+        # datasetLoader.print_dataset_summary_statistics(target_dataset, target_path, iris_data)
+        # Optionally plot the dataset (customize columns as needed)
+        # datasetPlotter.plotDataset(iris_data, 'sepal_length', 'sepal_width')
+
+        # --- The rest of your SVM code would go here, using iris_data as your DataFrame ---
+
+
+    except Exception as e:
+        logger.error(f"Error occurred in executeSupportVectorMachine() execution : {str(e)}", exc_info=True)
+        raise
+
+# Avoid other scripts from running
+# The classes/functions main method
+# This is a common Python idiom : scripts importable and executable
+
+def main():
+    executeSupportVectorMachine()
+
+if __name__ == "__main__":
+    main()
