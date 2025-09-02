@@ -1,0 +1,44 @@
+2025-09-01 21:11:17,400 - __main__ - INFO - twoDimLinearRegression.py:47 - In function call executeTwoDimLinearRegression(): Starting ML Linear Regression Dataset analysis.
+2025-09-01 21:11:17,712 - __main__ - ERROR - twoDimLinearRegression.py:102 - Error occurred in executeTwoDimLinearRegression() execution : x and y must have same first dimension, but have shapes (80, 1) and (20, 1)
+Traceback (most recent call last):
+  File "/Users/harisrid/Desktop/CODEBASES/MACHINE_LEARNING_ENGINEERING_SIDE_PROJECTS/SUPERVISED_LEARNING/LINEAR_REGRESSION/twoDimLinearRegression.py", line 87, in executeTwoDimLinearRegression
+    plt.plot(X_train, predictions, color='blue', linewidth=3)
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/harisrid/Desktop/CODEBASES/MACHINE_LEARNING_ENGINEERING_SIDE_PROJECTS/venv/lib/python3.13/site-packages/matplotlib/pyplot.py", line 3838, in plot
+    return gca().plot(
+           ~~~~~~~~~~^
+        *args,
+        ^^^^^^
+    ...<3 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    )
+    ^
+  File "/Users/harisrid/Desktop/CODEBASES/MACHINE_LEARNING_ENGINEERING_SIDE_PROJECTS/venv/lib/python3.13/site-packages/matplotlib/axes/_axes.py", line 1777, in plot
+    lines = [*self._get_lines(self, *args, data=data, **kwargs)]
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/harisrid/Desktop/CODEBASES/MACHINE_LEARNING_ENGINEERING_SIDE_PROJECTS/venv/lib/python3.13/site-packages/matplotlib/axes/_base.py", line 297, in __call__
+    yield from self._plot_args(
+               ~~~~~~~~~~~~~~~^
+        axes, this, kwargs, ambiguous_fmt_datakey=ambiguous_fmt_datakey,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        return_kwargs=return_kwargs
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/harisrid/Desktop/CODEBASES/MACHINE_LEARNING_ENGINEERING_SIDE_PROJECTS/venv/lib/python3.13/site-packages/matplotlib/axes/_base.py", line 494, in _plot_args
+    raise ValueError(f"x and y must have same first dimension, but "
+                     f"have shapes {x.shape} and {y.shape}")
+ValueError: x and y must have same first dimension, but have shapes (80, 1) and (20, 1)
+2025-09-01 21:11:43,878 - __main__ - INFO - twoDimLinearRegression.py:47 - In function call executeTwoDimLinearRegression(): Starting ML Linear Regression Dataset analysis.
+2025-09-01 21:12:11,521 - __main__ - INFO - twoDimLinearRegression.py:97 - Mean Absolute Error: 0.8619405622725755
+2025-09-01 21:12:11,521 - __main__ - INFO - twoDimLinearRegression.py:98 - Mean Squared Error: 1.3083830369897929
+2025-09-01 21:12:11,521 - __main__ - INFO - twoDimLinearRegression.py:99 - R^2 Score: -0.02366839891737471
+2025-09-01 21:12:13,465 - __main__ - INFO - twoDimLinearRegression.py:47 - In function call executeTwoDimLinearRegression(): Starting ML Linear Regression Dataset analysis.
+2025-09-01 21:12:15,346 - __main__ - INFO - twoDimLinearRegression.py:97 - Mean Absolute Error: 0.7087503141614272
+2025-09-01 21:12:15,346 - __main__ - INFO - twoDimLinearRegression.py:98 - Mean Squared Error: 0.8482834855952225
+2025-09-01 21:12:15,346 - __main__ - INFO - twoDimLinearRegression.py:99 - R^2 Score: 0.0021696488939541014
+2025-09-01 21:12:16,687 - __main__ - INFO - twoDimLinearRegression.py:47 - In function call executeTwoDimLinearRegression(): Starting ML Linear Regression Dataset analysis.
+2025-09-01 21:12:37,985 - __main__ - INFO - twoDimLinearRegression.py:97 - Mean Absolute Error: 0.6901835342497906
+2025-09-01 21:12:37,985 - __main__ - INFO - twoDimLinearRegression.py:98 - Mean Squared Error: 0.7494144754114779
+2025-09-01 21:12:37,985 - __main__ - INFO - twoDimLinearRegression.py:99 - R^2 Score: -0.07006489727200682
