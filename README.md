@@ -7,6 +7,11 @@
 # Move to the working directory 
 
 cd ../MACHINE_LEARNING_ENGINEERING_SIDE_PROJECTS
+
+# Upgrade pip to latest versions
+pip install --upgrade pip
+
+
 # Create virtual environment
 python -m venv venv
 

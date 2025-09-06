@@ -1,0 +1,64 @@
+2025-09-06 15:07:06,687 - __main__ - INFO - svm.py:48 - In function call executeSupportVectorMachine(): Starting ML Support Vector Machine Dataset analysis.
+2025-09-06 15:07:07,301 - __main__ - ERROR - svm.py:100 - Error occurred in executeSupportVectorMachine() execution : [Errno 2] No such file or directory: './DATA/uciml/iris.csv'
+Traceback (most recent call last):
+  File "/Users/harisrid/Desktop/CODEBASES/MACHINE_LEARNING_ENGINEERING_SIDE_PROJECTS/SUPERVISED_LEARNING/SVM - SUPPORT_VECTOR_MACHINE/svm.py", line 61, in executeSupportVectorMachine
+    iris_data = datasetLoader.getDataset(target_path, target_dataset)
+  File "/Users/harisrid/Desktop/CODEBASES/MACHINE_LEARNING_ENGINEERING_SIDE_PROJECTS/SUPERVISED_LEARNING/SVM - SUPPORT_VECTOR_MACHINE/../../UTILS/DatasetLoader.py", line 18, in getDataset
+    df = pd.read_csv(f'{target_path}/{target_dataset}.csv', sep=self.COMMA)
+  File "/Users/harisrid/Desktop/CODEBASES/MACHINE_LEARNING_ENGINEERING_SIDE_PROJECTS/SUPERVISED_LEARNING/SVM - SUPPORT_VECTOR_MACHINE/path/to/venv/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 1026, in read_csv
+    return _read(filepath_or_buffer, kwds)
+  File "/Users/harisrid/Desktop/CODEBASES/MACHINE_LEARNING_ENGINEERING_SIDE_PROJECTS/SUPERVISED_LEARNING/SVM - SUPPORT_VECTOR_MACHINE/path/to/venv/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 620, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+  File "/Users/harisrid/Desktop/CODEBASES/MACHINE_LEARNING_ENGINEERING_SIDE_PROJECTS/SUPERVISED_LEARNING/SVM - SUPPORT_VECTOR_MACHINE/path/to/venv/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 1620, in __init__
+    self._engine = self._make_engine(f, self.engine)
+                   ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "/Users/harisrid/Desktop/CODEBASES/MACHINE_LEARNING_ENGINEERING_SIDE_PROJECTS/SUPERVISED_LEARNING/SVM - SUPPORT_VECTOR_MACHINE/path/to/venv/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 1880, in _make_engine
+    self.handles = get_handle(
+                   ~~~~~~~~~~^
+        f,
+        ^^
+    ...<6 lines>...
+        storage_options=self.options.get("storage_options", None),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/harisrid/Desktop/CODEBASES/MACHINE_LEARNING_ENGINEERING_SIDE_PROJECTS/SUPERVISED_LEARNING/SVM - SUPPORT_VECTOR_MACHINE/path/to/venv/lib/python3.13/site-packages/pandas/io/common.py", line 873, in get_handle
+    handle = open(
+        handle,
+    ...<3 lines>...
+        newline="",
+    )
+FileNotFoundError: [Errno 2] No such file or directory: './DATA/uciml/iris.csv'
+2025-09-06 15:08:29,291 - __main__ - INFO - svm.py:48 - In function call executeSupportVectorMachine(): Starting ML Support Vector Machine Dataset analysis.
+2025-09-06 15:08:29,835 - __main__ - ERROR - svm.py:100 - Error occurred in executeSupportVectorMachine() execution : [Errno 2] No such file or directory: './DATA/Iris.csv.csv'
+Traceback (most recent call last):
+  File "/Users/harisrid/Desktop/CODEBASES/MACHINE_LEARNING_ENGINEERING_SIDE_PROJECTS/SUPERVISED_LEARNING/SVM - SUPPORT_VECTOR_MACHINE/svm.py", line 61, in executeSupportVectorMachine
+    iris_data = datasetLoader.getDataset(target_path, target_read_dataset, target_write_dataset)
+  File "/Users/harisrid/Desktop/CODEBASES/MACHINE_LEARNING_ENGINEERING_SIDE_PROJECTS/SUPERVISED_LEARNING/SVM - SUPPORT_VECTOR_MACHINE/../../UTILS/DatasetLoader.py", line 18, in getDataset
+    df = pd.read_csv(f'{target_path}/{target_read_dataset}.csv', sep=self.COMMA)
+  File "/Users/harisrid/Desktop/CODEBASES/MACHINE_LEARNING_ENGINEERING_SIDE_PROJECTS/SUPERVISED_LEARNING/SVM - SUPPORT_VECTOR_MACHINE/path/to/venv/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 1026, in read_csv
+    return _read(filepath_or_buffer, kwds)
+  File "/Users/harisrid/Desktop/CODEBASES/MACHINE_LEARNING_ENGINEERING_SIDE_PROJECTS/SUPERVISED_LEARNING/SVM - SUPPORT_VECTOR_MACHINE/path/to/venv/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 620, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+  File "/Users/harisrid/Desktop/CODEBASES/MACHINE_LEARNING_ENGINEERING_SIDE_PROJECTS/SUPERVISED_LEARNING/SVM - SUPPORT_VECTOR_MACHINE/path/to/venv/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 1620, in __init__
+    self._engine = self._make_engine(f, self.engine)
+                   ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "/Users/harisrid/Desktop/CODEBASES/MACHINE_LEARNING_ENGINEERING_SIDE_PROJECTS/SUPERVISED_LEARNING/SVM - SUPPORT_VECTOR_MACHINE/path/to/venv/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 1880, in _make_engine
+    self.handles = get_handle(
+                   ~~~~~~~~~~^
+        f,
+        ^^
+    ...<6 lines>...
+        storage_options=self.options.get("storage_options", None),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/harisrid/Desktop/CODEBASES/MACHINE_LEARNING_ENGINEERING_SIDE_PROJECTS/SUPERVISED_LEARNING/SVM - SUPPORT_VECTOR_MACHINE/path/to/venv/lib/python3.13/site-packages/pandas/io/common.py", line 873, in get_handle
+    handle = open(
+        handle,
+    ...<3 lines>...
+        newline="",
+    )
+FileNotFoundError: [Errno 2] No such file or directory: './DATA/Iris.csv.csv'
+2025-09-06 15:08:40,532 - __main__ - INFO - svm.py:48 - In function call executeSupportVectorMachine(): Starting ML Support Vector Machine Dataset analysis.
+2025-09-06 15:09:10,313 - __main__ - INFO - svm.py:48 - In function call executeSupportVectorMachine(): Starting ML Support Vector Machine Dataset analysis.
