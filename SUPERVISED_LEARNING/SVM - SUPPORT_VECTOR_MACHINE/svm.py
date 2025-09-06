@@ -3,6 +3,7 @@ import sys
 import os
 from xml.parsers.expat import model
 
+import pandas as pd
 import sklearn.metrics
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..'))
@@ -21,6 +22,8 @@ import numpy as np
 from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
 from sklearn.svm import SVR
+from sklearn.metrics import ConfusionMatrixDisplay
+
 
 # Create logs directory
 os.makedirs('LOGS', exist_ok=True)
@@ -117,12 +120,22 @@ def executeSupportVectorMachine():
         y_pred = svm_model.predict(X_test)
 
         # # Evaluate the model
-        print("Classification Report:")
+        print("SVM Classification Metrics Report:")
         # Desire F1 score as a balance of precision and recall
         # When both classes are imbalanced :-) 
         print(classification_report(y_test, y_pred))
+
+        # comparison_df = pd.DataFrame({'Actual': y_test, 'Predicted': y_pred})
+        # print(comparison_df)
+
+        # Print confusion matrix
         print("Confusion Matrix:")
-        print(confusion_matrix(y_test, y_pred))
+        class_names = sorted(y.unique()) # Sorted unique labels
+        cm = confusion_matrix(y_test, y_pred)
+        disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=class_names)
+        disp.plot(cmap='Blues')
+        plt.title("Confusion matrix with Class Labels")
+        plt.show()
 
         # Let's interpret the results of metrics
         # high precision - low false positive rate

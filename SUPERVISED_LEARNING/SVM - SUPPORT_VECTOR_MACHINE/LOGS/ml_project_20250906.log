@@ -145,3 +145,7 @@ KeyError: "['Id'] not in index"
 2025-09-06 15:42:06,037 - __main__ - INFO - svm.py:48 - In function call executeSupportVectorMachine(): Starting ML Support Vector Machine Dataset analysis.
 2025-09-06 15:42:10,539 - __main__ - INFO - svm.py:48 - In function call executeSupportVectorMachine(): Starting ML Support Vector Machine Dataset analysis.
 2025-09-06 15:42:15,527 - __main__ - INFO - svm.py:48 - In function call executeSupportVectorMachine(): Starting ML Support Vector Machine Dataset analysis.
+2025-09-06 15:44:13,421 - __main__ - INFO - svm.py:48 - In function call executeSupportVectorMachine(): Starting ML Support Vector Machine Dataset analysis.
+2025-09-06 15:44:31,123 - __main__ - INFO - svm.py:49 - In function call executeSupportVectorMachine(): Starting ML Support Vector Machine Dataset analysis.
+2025-09-06 15:56:33,293 - __main__ - INFO - svm.py:51 - In function call executeSupportVectorMachine(): Starting ML Support Vector Machine Dataset analysis.
+2025-09-06 15:57:07,310 - __main__ - INFO - svm.py:51 - In function call executeSupportVectorMachine(): Starting ML Support Vector Machine Dataset analysis.
