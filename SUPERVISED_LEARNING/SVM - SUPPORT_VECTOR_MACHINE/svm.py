@@ -80,14 +80,35 @@ def executeSupportVectorMachine():
         # Drop non-feature columns and separate features and labels
         # Check column names and their casing
         print(f"Iris data columns = {iris_data.columns.tolist()}")
-        X = iris_data.drop(columns=['Id', 'Species'])
-        y = iris_data['Species']
+        # Remove Unique identifier column if present
+        iris_data = iris_data.drop(columns=['Id'])
+        columns = iris_data.columns.tolist()
+        features = columns[:-1]
+        labels = columns[-1]
+        # features = features[1:3]
+        print(f"Features = {features}")
+        print(f"Label = {labels}")
+        print(f"Operating on {len(features)} features and {len(labels)} labels.")
+        X = iris_data[features]
+        y = iris_data[labels]
 
         # # Split the dataset into training and testing sets
         X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=TEST_SIZE, random_state=RANDOM_STATE)
 
         # # Create a SVM classifier
-        svm_model = SVC(kernel='linear')
+        # Linear Kernel: Simple and effective for linearly separable data.
+        # Polynomial Kernel: Captures polynomial relationships, allows for complex decision boundaries.
+        # Gaussian Kernel (RBF Kernel): Measures similarity based on distance; effective for non-linear data.
+        # RBF-based Kernel: General category, with the Gaussian kernel being the most common type.
+
+        # C := Regularization parameter, controls trade-off between achieving low training error and low testing error.
+        # gamma := Kernel coefficient, defines influence of a single training example.
+
+        # high C = low bias, high variance (overfitting)
+        # high gamma = low bias, high variance (overfitting)
+        # range of C : [0.1, 1, 10, 100]
+        # range of gamma : ['scale', 'auto', 0.001, 0.01, 0.1, 1, 10, 100]
+        svm_model = SVC(kernel='poly', C=1.0, gamma=1)  # You can experiment with different kernels
 
         # # Train the model
         svm_model.fit(X_train, y_train)
@@ -97,6 +118,8 @@ def executeSupportVectorMachine():
 
         # # Evaluate the model
         print("Classification Report:")
+        # Desire F1 score as a balance of precision and recall
+        # When both classes are imbalanced :-) 
         print(classification_report(y_test, y_pred))
         print("Confusion Matrix:")
         print(confusion_matrix(y_test, y_pred))

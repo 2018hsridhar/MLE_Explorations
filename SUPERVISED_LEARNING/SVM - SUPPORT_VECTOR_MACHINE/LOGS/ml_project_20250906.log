@@ -112,3 +112,36 @@ KeyError: 'species'
 2025-09-06 15:21:29,412 - __main__ - INFO - svm.py:48 - In function call executeSupportVectorMachine(): Starting ML Support Vector Machine Dataset analysis.
 2025-09-06 15:21:47,337 - __main__ - INFO - svm.py:48 - In function call executeSupportVectorMachine(): Starting ML Support Vector Machine Dataset analysis.
 2025-09-06 15:21:57,804 - __main__ - INFO - svm.py:48 - In function call executeSupportVectorMachine(): Starting ML Support Vector Machine Dataset analysis.
+2025-09-06 15:34:31,681 - __main__ - INFO - svm.py:48 - In function call executeSupportVectorMachine(): Starting ML Support Vector Machine Dataset analysis.
+2025-09-06 15:35:21,774 - __main__ - INFO - svm.py:48 - In function call executeSupportVectorMachine(): Starting ML Support Vector Machine Dataset analysis.
+2025-09-06 15:35:41,591 - __main__ - INFO - svm.py:48 - In function call executeSupportVectorMachine(): Starting ML Support Vector Machine Dataset analysis.
+2025-09-06 15:35:52,476 - __main__ - INFO - svm.py:48 - In function call executeSupportVectorMachine(): Starting ML Support Vector Machine Dataset analysis.
+2025-09-06 15:36:08,851 - __main__ - INFO - svm.py:48 - In function call executeSupportVectorMachine(): Starting ML Support Vector Machine Dataset analysis.
+2025-09-06 15:36:45,323 - __main__ - INFO - svm.py:48 - In function call executeSupportVectorMachine(): Starting ML Support Vector Machine Dataset analysis.
+2025-09-06 15:37:08,325 - __main__ - INFO - svm.py:48 - In function call executeSupportVectorMachine(): Starting ML Support Vector Machine Dataset analysis.
+2025-09-06 15:37:17,628 - __main__ - INFO - svm.py:48 - In function call executeSupportVectorMachine(): Starting ML Support Vector Machine Dataset analysis.
+2025-09-06 15:37:25,802 - __main__ - INFO - svm.py:48 - In function call executeSupportVectorMachine(): Starting ML Support Vector Machine Dataset analysis.
+2025-09-06 15:37:26,382 - __main__ - ERROR - svm.py:133 - Error occurred in executeSupportVectorMachine() execution : "['Id'] not in index"
+Traceback (most recent call last):
+  File "/Users/harisrid/Desktop/CODEBASES/MACHINE_LEARNING_ENGINEERING_SIDE_PROJECTS/SUPERVISED_LEARNING/SVM - SUPPORT_VECTOR_MACHINE/svm.py", line 92, in executeSupportVectorMachine
+    X = iris_data[features]
+        ~~~~~~~~~^^^^^^^^^^
+  File "/Users/harisrid/Desktop/CODEBASES/MACHINE_LEARNING_ENGINEERING_SIDE_PROJECTS/SUPERVISED_LEARNING/SVM - SUPPORT_VECTOR_MACHINE/path/to/venv/lib/python3.13/site-packages/pandas/core/frame.py", line 4113, in __getitem__
+    indexer = self.columns._get_indexer_strict(key, "columns")[1]
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "/Users/harisrid/Desktop/CODEBASES/MACHINE_LEARNING_ENGINEERING_SIDE_PROJECTS/SUPERVISED_LEARNING/SVM - SUPPORT_VECTOR_MACHINE/path/to/venv/lib/python3.13/site-packages/pandas/core/indexes/base.py", line 6212, in _get_indexer_strict
+    self._raise_if_missing(keyarr, indexer, axis_name)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/harisrid/Desktop/CODEBASES/MACHINE_LEARNING_ENGINEERING_SIDE_PROJECTS/SUPERVISED_LEARNING/SVM - SUPPORT_VECTOR_MACHINE/path/to/venv/lib/python3.13/site-packages/pandas/core/indexes/base.py", line 6264, in _raise_if_missing
+    raise KeyError(f"{not_found} not in index")
+KeyError: "['Id'] not in index"
+2025-09-06 15:37:55,360 - __main__ - INFO - svm.py:48 - In function call executeSupportVectorMachine(): Starting ML Support Vector Machine Dataset analysis.
+2025-09-06 15:38:09,358 - __main__ - INFO - svm.py:48 - In function call executeSupportVectorMachine(): Starting ML Support Vector Machine Dataset analysis.
+2025-09-06 15:38:14,430 - __main__ - INFO - svm.py:48 - In function call executeSupportVectorMachine(): Starting ML Support Vector Machine Dataset analysis.
+2025-09-06 15:41:32,692 - __main__ - INFO - svm.py:48 - In function call executeSupportVectorMachine(): Starting ML Support Vector Machine Dataset analysis.
+2025-09-06 15:41:38,939 - __main__ - INFO - svm.py:48 - In function call executeSupportVectorMachine(): Starting ML Support Vector Machine Dataset analysis.
+2025-09-06 15:41:49,912 - __main__ - INFO - svm.py:48 - In function call executeSupportVectorMachine(): Starting ML Support Vector Machine Dataset analysis.
+2025-09-06 15:41:58,837 - __main__ - INFO - svm.py:48 - In function call executeSupportVectorMachine(): Starting ML Support Vector Machine Dataset analysis.
+2025-09-06 15:42:06,037 - __main__ - INFO - svm.py:48 - In function call executeSupportVectorMachine(): Starting ML Support Vector Machine Dataset analysis.
+2025-09-06 15:42:10,539 - __main__ - INFO - svm.py:48 - In function call executeSupportVectorMachine(): Starting ML Support Vector Machine Dataset analysis.
+2025-09-06 15:42:15,527 - __main__ - INFO - svm.py:48 - In function call executeSupportVectorMachine(): Starting ML Support Vector Machine Dataset analysis.
