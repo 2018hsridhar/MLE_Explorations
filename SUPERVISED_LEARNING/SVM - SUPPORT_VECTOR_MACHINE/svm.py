@@ -49,7 +49,7 @@ def executeSupportVectorMachine():
 
     try:
         # Example: Download and load the Iris dataset from Kaggle using DatasetLoader
-        target_dataset = 'uciml/iris'  # Kaggle dataset identifier for Iris
+        target_read_dataset = 'uciml/iris'  # Kaggle dataset identifier for Iris
         target_path = "./DATA"
 
         datasetLoader = DatasetLoader()
@@ -57,14 +57,43 @@ def executeSupportVectorMachine():
         mockDataGenerator = MockDataGenerator()
 
         # Download and load the Iris dataset
-        proper_name = "Iris.csv"
-        iris_data = datasetLoader.getDataset(target_path, target_dataset)
+        target_write_dataset = 'Iris'
+        iris_data = datasetLoader.getDataset(target_path, target_read_dataset, target_write_dataset)
         # Optionally print summary statistics
-        # datasetLoader.print_dataset_summary_statistics(target_dataset, target_path, iris_data)
+        datasetLoader.print_dataset_summary_statistics(target_read_dataset, target_path, iris_data)
         # Optionally plot the dataset (customize columns as needed)
         # datasetPlotter.plotDataset(iris_data, 'sepal_length', 'sepal_width')
 
         # --- The rest of your SVM code would go here, using iris_data as your DataFrame ---
+        # For demonstration, let's create a simple SVM model on the Iris dataset
+        # from sklearn import datasets
+        # from sklearn.model_selection import train_test_split
+        # from sklearn.svm import SVC
+        # from sklearn.metrics import classification_report, confusion_matrix
+
+        # # Load the Iris dataset
+        # # Load popular datasets directly from sklearn
+        # iris = datasets.load_iris()
+        # X = iris.data
+        # y = iris.target
+
+        # # Split the dataset into training and testing sets
+        # X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=TEST_SIZE, random_state=RANDOM_STATE)
+
+        # # Create a SVM classifier
+        # svm_model = SVC(kernel='linear')
+
+        # # Train the model
+        # svm_model.fit(X_train, y_train)
+
+        # # Make predictions
+        # y_pred = svm_model.predict(X_test)
+
+        # # Evaluate the model
+        # print("Classification Report:")
+        # print(classification_report(y_test, y_pred))
+        # print("Confusion Matrix:")
+        # print(confusion_matrix(y_test, y_pred))
 
 
     except Exception as e:
