@@ -80,6 +80,13 @@ def executeSupportVectorMachine():
         # X = iris.data
         # y = iris.target
 
+
+        # Woah SVM correctlyc classified each results
+        # This is expected for Iris dataset with linear kernel because
+        # the classes are linearly separable in the feature space
+        # and the dataset is small and well-structured.
+        # Visualize decision boundaries if in 2D
+        
         # Drop non-feature columns and separate features and labels
         # Check column names and their casing
         print(f"Iris data columns = {iris_data.columns.tolist()}")
@@ -120,6 +127,11 @@ def executeSupportVectorMachine():
         y_pred = svm_model.predict(X_test)
 
         # # Evaluate the model
+        # Obtain performance metrics and understandings of the model
+        # Confusion Matrix = TP, TN, FP, FN = True Positive, True Negative, False Positive, False Negative
+        # Precision = TP / (TP + FP) = Out of all predicted positives, how many were actually positive?
+        # Recall = TP / (TP + FN) = Out of all actual positives, how many were correctly predicted?
+        # F1 Score = 2 * (Precision * Recall) / (Precision + Recall) = Harmonic mean of precision and recall
         print("SVM Classification Metrics Report:")
         # Desire F1 score as a balance of precision and recall
         # When both classes are imbalanced :-) 
@@ -143,11 +155,6 @@ def executeSupportVectorMachine():
         # F1-score - harmonic mean of precision and recall, useful for imbalanced classes
         # Support - number of true instances for each class in the dataset
 
-        # Woah SVM correctlyc classified each results
-        # This is expected for Iris dataset with linear kernel because
-        # the classes are linearly separable in the feature space
-        # and the dataset is small and well-structured.
-        # Visualize decision boundaries if in 2D
 
 
     except Exception as e:
