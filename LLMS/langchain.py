@@ -25,7 +25,6 @@ Asking questions : related or unrelated?
 Do we give context or not?
 
 Yes, providing context can help the model generate more accurate and relevant responses.
-OpenAI Key = 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
 
 
 
@@ -38,14 +37,15 @@ Resources = https://www.youtube.com/watch?v=UXGNpuHgT5g
 
 from langchain_openai import ChatOpenAI
 
-# export OPENAI_API_KEY="sk-..."  # Replace with your actual API key
-
-
-api_key= "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"
-targetModel = "gpt-3.5-turbo"
-targetTemp = 0
-max_tokens = 1024
-model = ChatOpenAI(model=targetModel, temperature=targetTemp, openai_api_key=api_key, max_tokens=max_tokens)
+def create_langchain_model():
+    # export OPENAI_API_KEY="sk-..."  # Replace with your actual API key
+    # export OPENAI_API_KEY="sk-..."  # Replace with your actual API key
+    api_key = ""
+    targetModel = "gpt-3.5-turbo"
+    targetTemp = 0
+    max_tokens = 1024
+    langchainModel = ChatOpenAI(model=targetModel, temperature=targetTemp, openai_api_key=api_key, max_tokens=max_tokens)
+    return langchainModel
 
 # Function to truncate prompt if too long
 # Assuming max prompt length is 500 characters for this example
@@ -54,18 +54,35 @@ def truncate_prompt(prompt, max_length=500):
     return prompt[:max_length]
 
 # Interactive loop to ask questions
-while True:
-    user_question = input("Enter your question: ")
-    exitResponses = ['exit', 'quit', 'q', 'close', 'stop']
-    if user_question.lower() in exitResponses:
-        print(f"Exiting the program.")
-        break
-    # Truncate prompt if too long
-    user_question = truncate_prompt(user_question)
-    response = model.invoke(user_question)
-    print("Answer:", response.content)
+def ask_questions():
+    langchainModel = create_langchain_model()
+    while(True):
+        user_question = input("Enter your question: ")
+        exitResponses = ['exit', 'quit', 'q', 'close', 'stop']
+        if user_question.lower() in exitResponses:
+            print(f"Exiting the program.")
+            break
+        # Truncate prompt if too long
+        user_question = truncate_prompt(user_question)
+        response = langchainModel.invoke(user_question)
+        print("Answer:", response.content)
 
 def testLangChain():
-    test_prompt = "What's the capital of India?"
-    response = model.invoke(test_prompt)
-    print("Test Answer:", response.content)
+    langchainModel = create_langchain_model()
+    test_prompts_and_answers = [
+        ("What's the capital of India?", "New Delhi"),
+        ("What's the largest city in the world?", "Tokyo"),
+        ("I am Hari. I am a senior software engineer. I live in San Francisco!\nQuestions:\n1. What is your name?\n2. Where do you live?\n3. What is your profession?", 
+         "1. My name is Hari.\n2. I live in San Francisco.\n3. I am a senior software engineer.")
+    ]
+    for test_prompt, expected_answer in test_prompts_and_answers:
+        response = langchainModel.invoke(test_prompt)
+        print("Test Answer:", response.content)
+        print("Expected Answer:", expected_answer)
+        print("Test Passed!" if response.content == expected_answer else "Test Failed!")
+
+def main():
+    testLangChain() # Run test
+
+if __name__ == "__main__":
+    main()
