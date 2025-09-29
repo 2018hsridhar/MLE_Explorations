@@ -160,3 +160,22 @@ Traceback (most recent call last):
     )
 FileNotFoundError: [Errno 2] No such file or directory: './DATA/data.csv.csv'
 2025-09-29 10:25:50,360 - __main__ - INFO - logisticRegression.py:41 - In function call executeLogisticRegression(): Starting ML Logistic Regression Dataset analysis.
+2025-09-29 10:32:41,848 - __main__ - INFO - logisticRegression.py:41 - In function call executeLogisticRegression(): Starting ML Logistic Regression Dataset analysis.
+2025-09-29 10:32:42,521 - __main__ - ERROR - logisticRegression.py:60 - Error occurred in executeTwoDimLinearRegression() execution : [Errno 2] No such file or directory: './DATA/data.csv' -> './DATA/uciml/breast-cancer-wisconsin-data.csv'
+Traceback (most recent call last):
+  File "/Users/harisrid/Desktop/CODEBASES/MACHINE_LEARNING_ENGINEERING_SIDE_PROJECTS/SUPERVISED_LEARNING/BINARY_CLASSIFICATION/LOGISTIC_REGRESSION/logisticRegression.py", line 54, in executeLogisticRegression
+    data = datasetLoader.getDataset(target_path,target_write_dataset, target_read_dataset)
+  File "/Users/harisrid/Desktop/CODEBASES/MACHINE_LEARNING_ENGINEERING_SIDE_PROJECTS/SUPERVISED_LEARNING/BINARY_CLASSIFICATION/LOGISTIC_REGRESSION/../../../UTILS/DatasetLoader.py", line 29, in getDataset
+    os.rename(downloaded_file, file_path)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: './DATA/data.csv' -> './DATA/uciml/breast-cancer-wisconsin-data.csv'
+2025-09-29 10:36:14,290 - __main__ - INFO - logisticRegression.py:41 - In function call executeLogisticRegression(): Starting ML Logistic Regression Dataset analysis.
+2025-09-29 10:36:15,054 - __main__ - ERROR - logisticRegression.py:60 - Error occurred in executeTwoDimLinearRegression() execution : [Errno 2] No such file or directory: './DATA/data.csv' -> './DATA/uciml/breast-cancer-wisconsin-data.csv'
+Traceback (most recent call last):
+  File "/Users/harisrid/Desktop/CODEBASES/MACHINE_LEARNING_ENGINEERING_SIDE_PROJECTS/SUPERVISED_LEARNING/BINARY_CLASSIFICATION/LOGISTIC_REGRESSION/logisticRegression.py", line 54, in executeLogisticRegression
+    data = datasetLoader.getDataset(target_path,target_write_dataset, target_read_dataset)
+  File "/Users/harisrid/Desktop/CODEBASES/MACHINE_LEARNING_ENGINEERING_SIDE_PROJECTS/SUPERVISED_LEARNING/BINARY_CLASSIFICATION/LOGISTIC_REGRESSION/../../../UTILS/DatasetLoader.py", line 29, in getDataset
+    os.rename(downloaded_file, file_path)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: './DATA/data.csv' -> './DATA/uciml/breast-cancer-wisconsin-data.csv'
+2025-09-29 10:38:30,037 - __main__ - INFO - logisticRegression.py:41 - In function call executeLogisticRegression(): Starting ML Logistic Regression Dataset analysis.

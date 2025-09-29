@@ -45,7 +45,8 @@ def executeLogisticRegression():
         # 1. Breast Cancer Wisconsin Dataset (Diagnostic) - 569 samples, 30 features, binary classification (malignant vs. benign)
         # Kaggle: Breast Cancer Wisconsin (Diagnostic) Data Set
         target_write_dataset = 'uciml/breast-cancer-wisconsin-data'
-        target_read_dataset = 'data'  
+        # target_read_dataset = 'uciml/breast-cancer-wisconsin-data'
+        target_read_dataset = 'data'  # The actual file in the zip is data.csv  
         target_path = "./DATA"
 
         datasetLoader = DatasetLoader()
