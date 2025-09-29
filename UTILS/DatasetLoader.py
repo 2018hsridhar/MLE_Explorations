@@ -15,6 +15,7 @@ class DatasetLoader:
         self.COMMA = ','
 
     # Renaming after download is the most flexible solution.
+
     def getDataset(self, target_path, target_write_dataset, target_read_dataset) -> pd.DataFrame:
         file_path = f'{target_path}/{target_read_dataset}.csv'
         # Skip download if file already exists
@@ -25,11 +26,11 @@ class DatasetLoader:
             self.api.dataset_download_files(target_write_dataset, path=target_path, unzip=True)
             # Find the actual downloaded file
             downloaded_file = os.path.join(target_path, "data.csv")
-            if os.path.exists(downloaded_file):
-                os.rename(downloaded_file, file_path)
-                print(f"Dataset download complete for Kaggle dataset {target_write_dataset}")
-            else:
-                raise FileNotFoundError(f"Expected file {downloaded_file} not found in dataset directory after download.")
+            # if os.path.exists(downloaded_file):
+            #     os.rename(downloaded_file, file_path)
+            #     print(f"Dataset download complete for Kaggle dataset {target_write_dataset}")
+            # else:
+            #     raise FileNotFoundError(f"Expected file {downloaded_file} not found in dataset directory after download.")
         df = pd.read_csv(file_path, sep=self.COMMA)
         return df
 
