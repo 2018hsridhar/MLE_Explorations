@@ -2,3 +2,20 @@
 2025-09-29 09:45:43,525 - __main__ - INFO - imageClassification-ConvolutionNeuralNetworks.py:39 - Dataset downloaded to: ./IMAGE_DATA
 2025-09-29 09:48:09,208 - __main__ - INFO - imageClassification-ConvolutionNeuralNetworks.py:28 - In function train_simple_cnn() : Starting CNN training with image data
 2025-09-29 09:48:09,208 - __main__ - INFO - imageClassification-ConvolutionNeuralNetworks.py:39 - Dataset downloaded to: ./IMAGE_DATA
+2025-09-29 09:54:30,898 - __main__ - INFO - imageClassification-ConvolutionNeuralNetworks.py:28 - In function train_simple_cnn() : Starting CNN training with image data
+2025-09-29 09:54:30,898 - __main__ - INFO - imageClassification-ConvolutionNeuralNetworks.py:38 - Image Dataset downloaded to: ./IMAGE_DATA
+2025-09-29 09:54:30,898 - __main__ - ERROR - imageClassification-ConvolutionNeuralNetworks.py:57 - Error in function train_simple_cnn() : CNN training: unsupported operand type(s) for +: 'map' and 'map'
+Traceback (most recent call last):
+  File "/Users/harisrid/Desktop/CODEBASES/MACHINE_LEARNING_ENGINEERING_SIDE_PROJECTS/UNSUPERVISED_LEARNING/NEURAL_NETWORKS/imageClassification-ConvolutionNeuralNetworks.py", line 44, in train_simple_cnn
+    images, labels, class_names = imageLoader.load_images_from_directory(dataset_path, image_size=(imageWidth, imageHeight))
+                                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/harisrid/Desktop/CODEBASES/MACHINE_LEARNING_ENGINEERING_SIDE_PROJECTS/UNSUPERVISED_LEARNING/NEURAL_NETWORKS/../../UTILS/ImageDatasetLoader.py", line 51, in load_images_from_directory
+    for img_path in class_dir.glob('*.jpg') + class_dir.glob('*.png') + class_dir.glob('*.jpeg'):
+                    ~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for +: 'map' and 'map'
+2025-09-29 09:55:45,239 - __main__ - INFO - imageClassification-ConvolutionNeuralNetworks.py:28 - In function train_simple_cnn() : Starting CNN training with image data
+2025-09-29 09:55:45,239 - __main__ - INFO - imageClassification-ConvolutionNeuralNetworks.py:38 - Image Dataset downloaded to: ./IMAGE_DATA
+2025-09-29 09:55:45,582 - __main__ - INFO - imageClassification-ConvolutionNeuralNetworks.py:47 - Loaded 80 images with 1 classes.
+2025-09-29 09:55:45,583 - __main__ - INFO - imageClassification-ConvolutionNeuralNetworks.py:51 - Training set size: 64 images
+2025-09-29 09:55:45,583 - __main__ - INFO - imageClassification-ConvolutionNeuralNetworks.py:52 - Testing set size: 16 images
+2025-09-29 09:55:45,583 - __main__ - INFO - imageClassification-ConvolutionNeuralNetworks.py:54 - Number of classes: 1

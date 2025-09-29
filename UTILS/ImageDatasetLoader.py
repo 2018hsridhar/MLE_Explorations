@@ -6,6 +6,8 @@ from PIL import Image
 import matplotlib.pyplot as plt
 from pathlib import Path
 
+import itertools
+
 class ImageDatasetLoader:
 
     def __init__(self):
@@ -47,8 +49,13 @@ class ImageDatasetLoader:
                 class_name = class_dir.name
                 class_names.append(class_name)
                 
-                # Load images from this class folder
-                for img_path in class_dir.glob('*.jpg') + class_dir.glob('*.png') + class_dir.glob('*.jpeg'):
+                # Use itertools.chain to combine multiple glob patterns
+                image_files = itertools.chain(
+                    class_dir.glob('*.jpg'),
+                    class_dir.glob('*.png'),
+                    class_dir.glob('*.jpeg')
+                )
+                for img_path in image_files:
                     try:
                         # Load and resize image
                         img = Image.open(img_path).convert('RGB')
