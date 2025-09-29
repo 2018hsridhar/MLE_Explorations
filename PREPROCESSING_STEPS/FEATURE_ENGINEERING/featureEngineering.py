@@ -55,6 +55,12 @@ def get_features(df_houses):
     minMaxScale(df_houses)
     return df_houses
 
+def main():
+    print(f"Feature engineering module")
+    
+if __name__ == "__main__":
+    main()
+
 
 
 
