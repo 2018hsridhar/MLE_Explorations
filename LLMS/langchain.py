@@ -38,8 +38,6 @@ Resources = https://www.youtube.com/watch?v=UXGNpuHgT5g
 from langchain_openai import ChatOpenAI
 
 def create_langchain_model():
-    # export OPENAI_API_KEY="sk-..."  # Replace with your actual API key
-    # export OPENAI_API_KEY="sk-..."  # Replace with your actual API key
     api_key = ""
     targetModel = "gpt-3.5-turbo"
     targetTemp = 0
