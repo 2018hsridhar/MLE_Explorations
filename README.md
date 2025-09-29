@@ -15,13 +15,14 @@ pip install --upgrade pip
 # Create virtual environment
 python -m venv venv
 
-# Activate it (macOS)
+# Activate virtual environment first if using requriements.txt
 # Keep dependencies isolatd
 # Then run your script with venv activated
 source venv/bin/activate
 
 # Install requirements
-pip install -r requirements.txt
+pip3 install -r requirements.txt
+pip3 install -r LLMS/requirements.txt
 pip install -r kaggle
 pip install 
 pip install -r matplotlib
