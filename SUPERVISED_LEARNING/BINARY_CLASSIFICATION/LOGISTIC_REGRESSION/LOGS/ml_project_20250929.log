@@ -1,0 +1,162 @@
+2025-09-29 10:22:21,154 - __main__ - INFO - logisticRegression.py:41 - In function call executeLogisticRegression(): Starting ML Logistic Regression Dataset analysis.
+2025-09-29 10:22:21,805 - __main__ - ERROR - logisticRegression.py:60 - Error occurred in executeTwoDimLinearRegression() execution : [Errno 2] No such file or directory: './DATA/uciml/breast-cancer-wisconsin-data.csv'
+Traceback (most recent call last):
+  File "/Users/harisrid/Desktop/CODEBASES/MACHINE_LEARNING_ENGINEERING_SIDE_PROJECTS/SUPERVISED_LEARNING/BINARY_CLASSIFICATION/LOGISTIC_REGRESSION/logisticRegression.py", line 54, in executeLogisticRegression
+    data = datasetLoader.getDataset(target_path,target_write_dataset, target_read_dataset)
+  File "/Users/harisrid/Desktop/CODEBASES/MACHINE_LEARNING_ENGINEERING_SIDE_PROJECTS/SUPERVISED_LEARNING/BINARY_CLASSIFICATION/LOGISTIC_REGRESSION/../../../UTILS/DatasetLoader.py", line 18, in getDataset
+    df = pd.read_csv(f'{target_path}/{target_read_dataset}.csv', sep=self.COMMA)
+  File "/Users/harisrid/Desktop/CODEBASES/MACHINE_LEARNING_ENGINEERING_SIDE_PROJECTS/UNSUPERVISED_LEARNING/NEURAL_NETWORKS/venv/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 1026, in read_csv
+    return _read(filepath_or_buffer, kwds)
+  File "/Users/harisrid/Desktop/CODEBASES/MACHINE_LEARNING_ENGINEERING_SIDE_PROJECTS/UNSUPERVISED_LEARNING/NEURAL_NETWORKS/venv/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 620, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+  File "/Users/harisrid/Desktop/CODEBASES/MACHINE_LEARNING_ENGINEERING_SIDE_PROJECTS/UNSUPERVISED_LEARNING/NEURAL_NETWORKS/venv/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 1620, in __init__
+    self._engine = self._make_engine(f, self.engine)
+                   ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "/Users/harisrid/Desktop/CODEBASES/MACHINE_LEARNING_ENGINEERING_SIDE_PROJECTS/UNSUPERVISED_LEARNING/NEURAL_NETWORKS/venv/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 1880, in _make_engine
+    self.handles = get_handle(
+                   ~~~~~~~~~~^
+        f,
+        ^^
+    ...<6 lines>...
+        storage_options=self.options.get("storage_options", None),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/harisrid/Desktop/CODEBASES/MACHINE_LEARNING_ENGINEERING_SIDE_PROJECTS/UNSUPERVISED_LEARNING/NEURAL_NETWORKS/venv/lib/python3.13/site-packages/pandas/io/common.py", line 873, in get_handle
+    handle = open(
+        handle,
+    ...<3 lines>...
+        newline="",
+    )
+FileNotFoundError: [Errno 2] No such file or directory: './DATA/uciml/breast-cancer-wisconsin-data.csv'
+2025-09-29 10:22:42,266 - __main__ - INFO - logisticRegression.py:41 - In function call executeLogisticRegression(): Starting ML Logistic Regression Dataset analysis.
+2025-09-29 10:23:00,253 - __main__ - ERROR - logisticRegression.py:60 - Error occurred in executeTwoDimLinearRegression() execution : HTTPSConnectionPool(host='www.kaggle.com', port=443): Read timed out. (read timeout=None)
+Traceback (most recent call last):
+  File "/Users/harisrid/Desktop/CODEBASES/MACHINE_LEARNING_ENGINEERING_SIDE_PROJECTS/UNSUPERVISED_LEARNING/NEURAL_NETWORKS/venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 464, in _make_request
+    self._validate_conn(conn)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/Users/harisrid/Desktop/CODEBASES/MACHINE_LEARNING_ENGINEERING_SIDE_PROJECTS/UNSUPERVISED_LEARNING/NEURAL_NETWORKS/venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 1093, in _validate_conn
+    conn.connect()
+    ~~~~~~~~~~~~^^
+  File "/Users/harisrid/Desktop/CODEBASES/MACHINE_LEARNING_ENGINEERING_SIDE_PROJECTS/UNSUPERVISED_LEARNING/NEURAL_NETWORKS/venv/lib/python3.13/site-packages/urllib3/connection.py", line 790, in connect
+    sock_and_verified = _ssl_wrap_socket_and_match_hostname(
+        sock=sock,
+    ...<14 lines>...
+        assert_fingerprint=self.assert_fingerprint,
+    )
+  File "/Users/harisrid/Desktop/CODEBASES/MACHINE_LEARNING_ENGINEERING_SIDE_PROJECTS/UNSUPERVISED_LEARNING/NEURAL_NETWORKS/venv/lib/python3.13/site-packages/urllib3/connection.py", line 969, in _ssl_wrap_socket_and_match_hostname
+    ssl_sock = ssl_wrap_socket(
+        sock=sock,
+    ...<8 lines>...
+        tls_in_tls=tls_in_tls,
+    )
+  File "/Users/harisrid/Desktop/CODEBASES/MACHINE_LEARNING_ENGINEERING_SIDE_PROJECTS/UNSUPERVISED_LEARNING/NEURAL_NETWORKS/venv/lib/python3.13/site-packages/urllib3/util/ssl_.py", line 480, in ssl_wrap_socket
+    ssl_sock = _ssl_wrap_socket_impl(sock, context, tls_in_tls, server_hostname)
+  File "/Users/harisrid/Desktop/CODEBASES/MACHINE_LEARNING_ENGINEERING_SIDE_PROJECTS/UNSUPERVISED_LEARNING/NEURAL_NETWORKS/venv/lib/python3.13/site-packages/urllib3/util/ssl_.py", line 524, in _ssl_wrap_socket_impl
+    return ssl_context.wrap_socket(sock, server_hostname=server_hostname)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.7/Frameworks/Python.framework/Versions/3.13/lib/python3.13/ssl.py", line 455, in wrap_socket
+    return self.sslsocket_class._create(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        sock=sock,
+        ^^^^^^^^^^
+    ...<5 lines>...
+        session=session
+        ^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.7/Frameworks/Python.framework/Versions/3.13/lib/python3.13/ssl.py", line 1076, in _create
+    self.do_handshake()
+    ~~~~~~~~~~~~~~~~~^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.7/Frameworks/Python.framework/Versions/3.13/lib/python3.13/ssl.py", line 1372, in do_handshake
+    self._sslobj.do_handshake()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^
+TimeoutError: [Errno 60] Operation timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/harisrid/Desktop/CODEBASES/MACHINE_LEARNING_ENGINEERING_SIDE_PROJECTS/UNSUPERVISED_LEARNING/NEURAL_NETWORKS/venv/lib/python3.13/site-packages/requests/adapters.py", line 644, in send
+    resp = conn.urlopen(
+        method=request.method,
+    ...<9 lines>...
+        chunked=chunked,
+    )
+  File "/Users/harisrid/Desktop/CODEBASES/MACHINE_LEARNING_ENGINEERING_SIDE_PROJECTS/UNSUPERVISED_LEARNING/NEURAL_NETWORKS/venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+        method, url, error=new_e, _pool=self, _stacktrace=sys.exc_info()[2]
+    )
+  File "/Users/harisrid/Desktop/CODEBASES/MACHINE_LEARNING_ENGINEERING_SIDE_PROJECTS/UNSUPERVISED_LEARNING/NEURAL_NETWORKS/venv/lib/python3.13/site-packages/urllib3/util/retry.py", line 474, in increment
+    raise reraise(type(error), error, _stacktrace)
+          ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/harisrid/Desktop/CODEBASES/MACHINE_LEARNING_ENGINEERING_SIDE_PROJECTS/UNSUPERVISED_LEARNING/NEURAL_NETWORKS/venv/lib/python3.13/site-packages/urllib3/util/util.py", line 39, in reraise
+    raise value
+  File "/Users/harisrid/Desktop/CODEBASES/MACHINE_LEARNING_ENGINEERING_SIDE_PROJECTS/UNSUPERVISED_LEARNING/NEURAL_NETWORKS/venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+        conn,
+    ...<10 lines>...
+        **response_kw,
+    )
+  File "/Users/harisrid/Desktop/CODEBASES/MACHINE_LEARNING_ENGINEERING_SIDE_PROJECTS/UNSUPERVISED_LEARNING/NEURAL_NETWORKS/venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 488, in _make_request
+    raise new_e
+  File "/Users/harisrid/Desktop/CODEBASES/MACHINE_LEARNING_ENGINEERING_SIDE_PROJECTS/UNSUPERVISED_LEARNING/NEURAL_NETWORKS/venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 466, in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=conn.timeout)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/harisrid/Desktop/CODEBASES/MACHINE_LEARNING_ENGINEERING_SIDE_PROJECTS/UNSUPERVISED_LEARNING/NEURAL_NETWORKS/venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 367, in _raise_timeout
+    raise ReadTimeoutError(
+        self, url, f"Read timed out. (read timeout={timeout_value})"
+    ) from err
+urllib3.exceptions.ReadTimeoutError: HTTPSConnectionPool(host='www.kaggle.com', port=443): Read timed out. (read timeout=None)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/harisrid/Desktop/CODEBASES/MACHINE_LEARNING_ENGINEERING_SIDE_PROJECTS/SUPERVISED_LEARNING/BINARY_CLASSIFICATION/LOGISTIC_REGRESSION/logisticRegression.py", line 54, in executeLogisticRegression
+    data = datasetLoader.getDataset(target_path,target_write_dataset, target_read_dataset)
+  File "/Users/harisrid/Desktop/CODEBASES/MACHINE_LEARNING_ENGINEERING_SIDE_PROJECTS/SUPERVISED_LEARNING/BINARY_CLASSIFICATION/LOGISTIC_REGRESSION/../../../UTILS/DatasetLoader.py", line 17, in getDataset
+    self.api.dataset_download_files(target_write_dataset, path=target_path, unzip=True)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/harisrid/Desktop/CODEBASES/MACHINE_LEARNING_ENGINEERING_SIDE_PROJECTS/UNSUPERVISED_LEARNING/NEURAL_NETWORKS/venv/lib/python3.13/site-packages/kaggle/api/kaggle_api_extended.py", line 1664, in dataset_download_files
+    response = kaggle.datasets.dataset_api_client.download_dataset(request)
+  File "/Users/harisrid/Desktop/CODEBASES/MACHINE_LEARNING_ENGINEERING_SIDE_PROJECTS/UNSUPERVISED_LEARNING/NEURAL_NETWORKS/venv/lib/python3.13/site-packages/kagglesdk/datasets/services/dataset_api_service.py", line 80, in download_dataset
+    return self._client.call("datasets.DatasetApiService", "ApiDownloadDataset", request, HttpRedirect)
+           ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/harisrid/Desktop/CODEBASES/MACHINE_LEARNING_ENGINEERING_SIDE_PROJECTS/UNSUPERVISED_LEARNING/NEURAL_NETWORKS/venv/lib/python3.13/site-packages/kagglesdk/kaggle_http_client.py", line 124, in call
+    http_response = self._session.send(http_request, **settings)
+  File "/Users/harisrid/Desktop/CODEBASES/MACHINE_LEARNING_ENGINEERING_SIDE_PROJECTS/UNSUPERVISED_LEARNING/NEURAL_NETWORKS/venv/lib/python3.13/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/Users/harisrid/Desktop/CODEBASES/MACHINE_LEARNING_ENGINEERING_SIDE_PROJECTS/UNSUPERVISED_LEARNING/NEURAL_NETWORKS/venv/lib/python3.13/site-packages/requests/adapters.py", line 690, in send
+    raise ReadTimeout(e, request=request)
+requests.exceptions.ReadTimeout: HTTPSConnectionPool(host='www.kaggle.com', port=443): Read timed out. (read timeout=None)
+2025-09-29 10:25:29,743 - __main__ - INFO - logisticRegression.py:41 - In function call executeLogisticRegression(): Starting ML Logistic Regression Dataset analysis.
+2025-09-29 10:25:30,384 - __main__ - ERROR - logisticRegression.py:60 - Error occurred in executeTwoDimLinearRegression() execution : [Errno 2] No such file or directory: './DATA/data.csv.csv'
+Traceback (most recent call last):
+  File "/Users/harisrid/Desktop/CODEBASES/MACHINE_LEARNING_ENGINEERING_SIDE_PROJECTS/SUPERVISED_LEARNING/BINARY_CLASSIFICATION/LOGISTIC_REGRESSION/logisticRegression.py", line 54, in executeLogisticRegression
+    data = datasetLoader.getDataset(target_path,target_write_dataset, target_read_dataset)
+  File "/Users/harisrid/Desktop/CODEBASES/MACHINE_LEARNING_ENGINEERING_SIDE_PROJECTS/SUPERVISED_LEARNING/BINARY_CLASSIFICATION/LOGISTIC_REGRESSION/../../../UTILS/DatasetLoader.py", line 26, in getDataset
+    df = pd.read_csv(file_path, sep=self.COMMA)
+  File "/Users/harisrid/Desktop/CODEBASES/MACHINE_LEARNING_ENGINEERING_SIDE_PROJECTS/UNSUPERVISED_LEARNING/NEURAL_NETWORKS/venv/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 1026, in read_csv
+    return _read(filepath_or_buffer, kwds)
+  File "/Users/harisrid/Desktop/CODEBASES/MACHINE_LEARNING_ENGINEERING_SIDE_PROJECTS/UNSUPERVISED_LEARNING/NEURAL_NETWORKS/venv/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 620, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+  File "/Users/harisrid/Desktop/CODEBASES/MACHINE_LEARNING_ENGINEERING_SIDE_PROJECTS/UNSUPERVISED_LEARNING/NEURAL_NETWORKS/venv/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 1620, in __init__
+    self._engine = self._make_engine(f, self.engine)
+                   ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "/Users/harisrid/Desktop/CODEBASES/MACHINE_LEARNING_ENGINEERING_SIDE_PROJECTS/UNSUPERVISED_LEARNING/NEURAL_NETWORKS/venv/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 1880, in _make_engine
+    self.handles = get_handle(
+                   ~~~~~~~~~~^
+        f,
+        ^^
+    ...<6 lines>...
+        storage_options=self.options.get("storage_options", None),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/harisrid/Desktop/CODEBASES/MACHINE_LEARNING_ENGINEERING_SIDE_PROJECTS/UNSUPERVISED_LEARNING/NEURAL_NETWORKS/venv/lib/python3.13/site-packages/pandas/io/common.py", line 873, in get_handle
+    handle = open(
+        handle,
+    ...<3 lines>...
+        newline="",
+    )
+FileNotFoundError: [Errno 2] No such file or directory: './DATA/data.csv.csv'
+2025-09-29 10:25:50,360 - __main__ - INFO - logisticRegression.py:41 - In function call executeLogisticRegression(): Starting ML Logistic Regression Dataset analysis.

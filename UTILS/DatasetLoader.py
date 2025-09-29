@@ -5,6 +5,7 @@
 # pip install matplotlib
 from kaggle.api.kaggle_api_extended import KaggleApi
 import pandas as pd
+import os
 
 class DatasetLoader:
 
@@ -14,8 +15,15 @@ class DatasetLoader:
         self.COMMA = ','
 
     def getDataset(self, target_path, target_write_dataset, target_read_dataset) -> pd.DataFrame:
-        self.api.dataset_download_files(target_write_dataset, path=target_path, unzip=True)
-        df = pd.read_csv(f'{target_path}/{target_read_dataset}.csv', sep=self.COMMA)
+        file_path = f'{target_path}/{target_read_dataset}.csv'
+        # Skip download if file already exists
+        if os.path.exists(file_path):
+            print(f"✓ File {file_path} already exists. Skipping Kaggle download.")
+        else:
+            print(f"📥 Downloading dataset {target_write_dataset} from Kaggle...")
+            self.api.dataset_download_files(target_write_dataset, path=target_path, unzip=True)
+            print(f"✓ Download complete.")
+        df = pd.read_csv(file_path, sep=self.COMMA)
         return df
 
     def print_dataset_summary_statistics(self,target_dataset,target_path,df) -> None:

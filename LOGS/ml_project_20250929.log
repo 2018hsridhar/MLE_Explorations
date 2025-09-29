@@ -1,0 +1,99 @@
+2025-09-29 10:17:45,143 - __main__ - INFO - logisticRegression.py:41 - In function call executeLogisticRegression(): Starting ML Logistic Regression Dataset analysis.
+2025-09-29 10:17:45,143 - __main__ - ERROR - logisticRegression.py:59 - Error occurred in executeTwoDimLinearRegression() execution : DatasetLoader.getDataset() missing 1 required positional argument: 'target_read_dataset'
+Traceback (most recent call last):
+  File "/Users/harisrid/Desktop/CODEBASES/MACHINE_LEARNING_ENGINEERING_SIDE_PROJECTS/SUPERVISED_LEARNING/BINARY_CLASSIFICATION/LOGISTIC_REGRESSION/logisticRegression.py", line 53, in executeLogisticRegression
+    data = datasetLoader.getDataset(target_path,target_dataset)
+TypeError: DatasetLoader.getDataset() missing 1 required positional argument: 'target_read_dataset'
+2025-09-29 10:18:26,918 - __main__ - INFO - logisticRegression.py:41 - In function call executeLogisticRegression(): Starting ML Logistic Regression Dataset analysis.
+2025-09-29 10:18:27,678 - __main__ - ERROR - logisticRegression.py:60 - Error occurred in executeTwoDimLinearRegression() execution : [Errno 2] No such file or directory: './DATA/uciml/breast-cancer-wisconsin-data.csv'
+Traceback (most recent call last):
+  File "/Users/harisrid/Desktop/CODEBASES/MACHINE_LEARNING_ENGINEERING_SIDE_PROJECTS/SUPERVISED_LEARNING/BINARY_CLASSIFICATION/LOGISTIC_REGRESSION/logisticRegression.py", line 54, in executeLogisticRegression
+    data = datasetLoader.getDataset(target_path,target_write_dataset, target_read_dataset)
+  File "/Users/harisrid/Desktop/CODEBASES/MACHINE_LEARNING_ENGINEERING_SIDE_PROJECTS/SUPERVISED_LEARNING/BINARY_CLASSIFICATION/LOGISTIC_REGRESSION/../../../UTILS/DatasetLoader.py", line 18, in getDataset
+    df = pd.read_csv(f'{target_path}/{target_read_dataset}.csv', sep=self.COMMA)
+  File "/Users/harisrid/Desktop/CODEBASES/MACHINE_LEARNING_ENGINEERING_SIDE_PROJECTS/UNSUPERVISED_LEARNING/NEURAL_NETWORKS/venv/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 1026, in read_csv
+    return _read(filepath_or_buffer, kwds)
+  File "/Users/harisrid/Desktop/CODEBASES/MACHINE_LEARNING_ENGINEERING_SIDE_PROJECTS/UNSUPERVISED_LEARNING/NEURAL_NETWORKS/venv/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 620, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+  File "/Users/harisrid/Desktop/CODEBASES/MACHINE_LEARNING_ENGINEERING_SIDE_PROJECTS/UNSUPERVISED_LEARNING/NEURAL_NETWORKS/venv/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 1620, in __init__
+    self._engine = self._make_engine(f, self.engine)
+                   ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "/Users/harisrid/Desktop/CODEBASES/MACHINE_LEARNING_ENGINEERING_SIDE_PROJECTS/UNSUPERVISED_LEARNING/NEURAL_NETWORKS/venv/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 1880, in _make_engine
+    self.handles = get_handle(
+                   ~~~~~~~~~~^
+        f,
+        ^^
+    ...<6 lines>...
+        storage_options=self.options.get("storage_options", None),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/harisrid/Desktop/CODEBASES/MACHINE_LEARNING_ENGINEERING_SIDE_PROJECTS/UNSUPERVISED_LEARNING/NEURAL_NETWORKS/venv/lib/python3.13/site-packages/pandas/io/common.py", line 873, in get_handle
+    handle = open(
+        handle,
+    ...<3 lines>...
+        newline="",
+    )
+FileNotFoundError: [Errno 2] No such file or directory: './DATA/uciml/breast-cancer-wisconsin-data.csv'
+2025-09-29 10:20:36,552 - __main__ - INFO - logisticRegression.py:41 - In function call executeLogisticRegression(): Starting ML Logistic Regression Dataset analysis.
+2025-09-29 10:20:37,204 - __main__ - ERROR - logisticRegression.py:60 - Error occurred in executeTwoDimLinearRegression() execution : [Errno 2] No such file or directory: './DATA/uciml/breast-cancer-wisconsin-data.csv'
+Traceback (most recent call last):
+  File "/Users/harisrid/Desktop/CODEBASES/MACHINE_LEARNING_ENGINEERING_SIDE_PROJECTS/SUPERVISED_LEARNING/BINARY_CLASSIFICATION/LOGISTIC_REGRESSION/logisticRegression.py", line 54, in executeLogisticRegression
+    data = datasetLoader.getDataset(target_path,target_write_dataset, target_read_dataset)
+  File "/Users/harisrid/Desktop/CODEBASES/MACHINE_LEARNING_ENGINEERING_SIDE_PROJECTS/SUPERVISED_LEARNING/BINARY_CLASSIFICATION/LOGISTIC_REGRESSION/../../../UTILS/DatasetLoader.py", line 18, in getDataset
+    df = pd.read_csv(f'{target_path}/{target_read_dataset}.csv', sep=self.COMMA)
+  File "/Users/harisrid/Desktop/CODEBASES/MACHINE_LEARNING_ENGINEERING_SIDE_PROJECTS/UNSUPERVISED_LEARNING/NEURAL_NETWORKS/venv/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 1026, in read_csv
+    return _read(filepath_or_buffer, kwds)
+  File "/Users/harisrid/Desktop/CODEBASES/MACHINE_LEARNING_ENGINEERING_SIDE_PROJECTS/UNSUPERVISED_LEARNING/NEURAL_NETWORKS/venv/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 620, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+  File "/Users/harisrid/Desktop/CODEBASES/MACHINE_LEARNING_ENGINEERING_SIDE_PROJECTS/UNSUPERVISED_LEARNING/NEURAL_NETWORKS/venv/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 1620, in __init__
+    self._engine = self._make_engine(f, self.engine)
+                   ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "/Users/harisrid/Desktop/CODEBASES/MACHINE_LEARNING_ENGINEERING_SIDE_PROJECTS/UNSUPERVISED_LEARNING/NEURAL_NETWORKS/venv/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 1880, in _make_engine
+    self.handles = get_handle(
+                   ~~~~~~~~~~^
+        f,
+        ^^
+    ...<6 lines>...
+        storage_options=self.options.get("storage_options", None),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/harisrid/Desktop/CODEBASES/MACHINE_LEARNING_ENGINEERING_SIDE_PROJECTS/UNSUPERVISED_LEARNING/NEURAL_NETWORKS/venv/lib/python3.13/site-packages/pandas/io/common.py", line 873, in get_handle
+    handle = open(
+        handle,
+    ...<3 lines>...
+        newline="",
+    )
+FileNotFoundError: [Errno 2] No such file or directory: './DATA/uciml/breast-cancer-wisconsin-data.csv'
+2025-09-29 10:20:57,905 - __main__ - INFO - logisticRegression.py:41 - In function call executeLogisticRegression(): Starting ML Logistic Regression Dataset analysis.
+2025-09-29 10:20:58,584 - __main__ - ERROR - logisticRegression.py:60 - Error occurred in executeTwoDimLinearRegression() execution : [Errno 2] No such file or directory: './DATA/uciml/breast-cancer-wisconsin-data.csv'
+Traceback (most recent call last):
+  File "/Users/harisrid/Desktop/CODEBASES/MACHINE_LEARNING_ENGINEERING_SIDE_PROJECTS/SUPERVISED_LEARNING/BINARY_CLASSIFICATION/LOGISTIC_REGRESSION/logisticRegression.py", line 54, in executeLogisticRegression
+    data = datasetLoader.getDataset(target_path,target_write_dataset, target_read_dataset)
+  File "/Users/harisrid/Desktop/CODEBASES/MACHINE_LEARNING_ENGINEERING_SIDE_PROJECTS/SUPERVISED_LEARNING/BINARY_CLASSIFICATION/LOGISTIC_REGRESSION/../../../UTILS/DatasetLoader.py", line 18, in getDataset
+    df = pd.read_csv(f'{target_path}/{target_read_dataset}.csv', sep=self.COMMA)
+  File "/Users/harisrid/Desktop/CODEBASES/MACHINE_LEARNING_ENGINEERING_SIDE_PROJECTS/UNSUPERVISED_LEARNING/NEURAL_NETWORKS/venv/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 1026, in read_csv
+    return _read(filepath_or_buffer, kwds)
+  File "/Users/harisrid/Desktop/CODEBASES/MACHINE_LEARNING_ENGINEERING_SIDE_PROJECTS/UNSUPERVISED_LEARNING/NEURAL_NETWORKS/venv/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 620, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+  File "/Users/harisrid/Desktop/CODEBASES/MACHINE_LEARNING_ENGINEERING_SIDE_PROJECTS/UNSUPERVISED_LEARNING/NEURAL_NETWORKS/venv/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 1620, in __init__
+    self._engine = self._make_engine(f, self.engine)
+                   ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "/Users/harisrid/Desktop/CODEBASES/MACHINE_LEARNING_ENGINEERING_SIDE_PROJECTS/UNSUPERVISED_LEARNING/NEURAL_NETWORKS/venv/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 1880, in _make_engine
+    self.handles = get_handle(
+                   ~~~~~~~~~~^
+        f,
+        ^^
+    ...<6 lines>...
+        storage_options=self.options.get("storage_options", None),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/harisrid/Desktop/CODEBASES/MACHINE_LEARNING_ENGINEERING_SIDE_PROJECTS/UNSUPERVISED_LEARNING/NEURAL_NETWORKS/venv/lib/python3.13/site-packages/pandas/io/common.py", line 873, in get_handle
+    handle = open(
+        handle,
+    ...<3 lines>...
+        newline="",
+    )
+FileNotFoundError: [Errno 2] No such file or directory: './DATA/uciml/breast-cancer-wisconsin-data.csv'
