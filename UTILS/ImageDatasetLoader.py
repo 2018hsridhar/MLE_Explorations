@@ -9,14 +9,29 @@ from pathlib import Path
 class ImageDatasetLoader:
 
     def __init__(self):
-        self.api = KaggleApi()
-        self.api.authenticate()
+        try:
+            self.api = KaggleApi()
+            self.api.authenticate()
+        except Exception as e:
+            print(f"Error initializing Kaggle API: {e}")
+            raise
 
-    def download_image_dataset(self, target_path, target_dataset):
-        """Download image dataset from Kaggle"""
+    def download_image_dataset(self, target_path, target_dataset, force_download=False):
+        """
+        Download image dataset from Kaggle only if not already present,
+        unless force_download is True.
+        """
         os.makedirs(target_path, exist_ok=True)
-        self.api.dataset_download_files(target_dataset, path=target_path, unzip=True)
-        return target_path
+        # Check if data already exists (look for any files in the directory)
+        data_exists = any(os.scandir(target_path))
+        if data_exists and not force_download:
+            print(f"Dataset already exists in {target_path}. Skipping download.")
+            return target_path
+        else:
+            print(f"Downloading dataset: {target_dataset} to {target_path}")
+            self.api.dataset_download_files(target_dataset, path=target_path, unzip=True)
+            print(f"Dataset downloaded to: {target_path}")
+            return target_path
 
     def load_images_from_directory(self, dataset_path, image_size=(224, 224)):
         """Load images and labels from directory structure"""

@@ -23,7 +23,7 @@ os.makedirs('LOGS', exist_ok=True)
 logger = get_logger(__name__)
 
 def train_simple_cnn():
-
+    statusCode = 0
     try:
         logger.info(f"In function train_simple_cnn() : Starting CNN training with image data")
     
@@ -35,15 +35,23 @@ def train_simple_cnn():
         imageLoader = ImageDatasetLoader()
         
         # Download dataset
-        dataset_path = imageLoader.download_image_dataset(target_path, target_dataset)
+        dataset_path = imageLoader.download_image_dataset(target_path, target_dataset, force_download=False)
         logger.info(f"Dataset downloaded to: {dataset_path}")
+        statusCode = 0
     except Exception as e:
-        logger.error(f"Error in CNN training: {str(e)}", exc_info=True)
-        raise
+        logger.error(f"Error in function train_simple_cnn() : CNN training: {str(e)}", exc_info=True)
+        statusCode = 1
+    finally:
+        return statusCode
+
 
 def main():
-    train_simple_cnn()
+    print(f"Running {__file__} as main script")
+    statusCode = train_simple_cnn()
+    if(statusCode == 0):
+        print(f"Script {__file__} executed successfully")
+    else:
+        print(f"Script {__file__} failed with status code {statusCode}")
 
-main()
-# if __name__ == "__main__":
-#     main()
+if __name__ == "__main__":
+    main()

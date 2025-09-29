@@ -28,17 +28,6 @@ Yes, providing context can help the model generate more accurate and relevant re
 Resources = https://www.youtube.com/watch?v=UXGNpuHgT5g
 
 '''
-
-# pip3 install langchain_openai
-# pip3 install langchain
-# pip3 install openai
-# pip3 install --upgrade openai
-# pip3 install --upgrade langchain
-# pip3 install --upgrade langchain_openai
-# pip3 install git-filter-repo
-
-
-
 from langchain_openai import ChatOpenAI
 
 def create_langchain_model():

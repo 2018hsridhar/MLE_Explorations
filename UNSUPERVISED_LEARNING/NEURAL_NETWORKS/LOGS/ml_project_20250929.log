@@ -1,0 +1,4 @@
+2025-09-29 09:45:42,082 - __main__ - INFO - imageClassification-ConvolutionNeuralNetworks.py:28 - In function train_simple_cnn() : Starting CNN training with image data
+2025-09-29 09:45:43,525 - __main__ - INFO - imageClassification-ConvolutionNeuralNetworks.py:39 - Dataset downloaded to: ./IMAGE_DATA
+2025-09-29 09:48:09,208 - __main__ - INFO - imageClassification-ConvolutionNeuralNetworks.py:28 - In function train_simple_cnn() : Starting CNN training with image data
+2025-09-29 09:48:09,208 - __main__ - INFO - imageClassification-ConvolutionNeuralNetworks.py:39 - Dataset downloaded to: ./IMAGE_DATA
