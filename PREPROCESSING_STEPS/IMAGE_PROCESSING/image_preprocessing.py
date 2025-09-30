@@ -14,6 +14,7 @@ Add layers to the sequential model during initialization
 
 Goals : 
 Preprocessing, formatting, and augmentation of images for ML model training
+Model generalizability into the real world : test and validation.
 
 Best practices for image preprocessing:
 Always normalize pixel values to [0,1] or use standard normalization
@@ -25,7 +26,7 @@ Resize images consistently to match model input requirements
 Handle different aspect ratios appropriately (pad vs. crop vs. stretch)
 '''
 
-class ImagePreprocessorLayers():
+class ImagePreprocessorLayers:
 
     def __init__(self):
         self.processing_layers = []
@@ -33,27 +34,55 @@ class ImagePreprocessorLayers():
         self.model = Sequential(self.processing_layers + self.augmentation_layers, name="image_preprocessing_pipeline")
         self.name = "image_preprocessing_pipeline"
 
-    def create_input_layer(self):
+    # height, width factor of 0.9 means zoom in by 10%  (90% of original size)
+    def create_random_crop_layer(self, input_height=180, input_width=180, crop_factor=0.9):
+        """
+        Create a TensorFlow layer that randomly crops images
+        Random cropping is a common data augmentation technique to improve model generalization
+        
+        Args:
+            input_height: Expected input image height
+            input_width: Expected input image width
+            crop_factor: Factor to crop (0.9 = 90% of original size, zoom in by 10%)
+        """
+        crop_height = int(input_height * crop_factor)  # 90% of input height
+        crop_width = int(input_width * crop_factor)    # 90% of input width
+        
+        crop_layer = tf.keras.layers.RandomCrop(
+            height=crop_height,  # Crop height (90% of original)
+            width=crop_width,    # Crop width (90% of original)
+            name='random_crop'
+        )
+        return crop_layer
+
+    def create_input_layer(self, input_size):
         """
         Create a TensorFlow input layer for images
         # Input shape: (batch_size, height, width, channels)
         # Variable batch size : any # of images
         # Variable height and width for input flexibility
         """
-        input_layer = tf.keras.Input(shape=(None, None, 3), name='input_image')  # Height and width can be variable
+        input_layer = tf.keras.Input(shape=(270,270,3), name='input_image')  # Height and width can be variable
         return input_layer
 
     # TensorFlow layer for resizing images to 180x180x3
-    def create_resize_layer(self):
+    def create_resize_layer(self, target_height=180, target_width=180):
         """
-        Create a TensorFlow layer that resizes images to 180x180x3
+        Create a TensorFlow layer that resizes images to specified dimensions
+        Default: 180x180x3 (preserves 3 RGB channels)
+        
+        Args:
+            target_height: Target height for resized images (default: 180)
+            target_width: Target width for resized images (default: 180)
+            
+        Note: The 3rd dimension (channels) is preserved automatically
         """
         resize_layer = tf.keras.layers.Resizing(
-            height=180, 
-            width=180,
+            height=target_height, 
+            width=target_width,
             interpolation='bilinear',  # Options: 'bilinear', 'nearest', 'bicubic', 'area', 'lanczos3', 'lanczos5', 'gaussian', 'mitchellcubic'
             crop_to_aspect_ratio=False,  # If True, crops to aspect ratio before resizing
-            name='resize_180x180'
+            name=f'resize_{target_height}x{target_width}x3'  # Reflects output dimensions
         )
         return resize_layer
 
@@ -79,7 +108,7 @@ class ImagePreprocessorLayers():
         Random flipping is a common data augmentation technique to improve model generalization
         """
         flip_layer = tf.keras.layers.RandomFlip(
-            mode='horizontal',  # Options: 'horizontal', 'vertical', 'horizontal_and_vertical'
+            mode='horizontal_and_vertical',  # Options: 'horizontal', 'vertical', 'horizontal_and_vertical'
             name='random_flip'
         )
         return flip_layer
@@ -191,7 +220,7 @@ class ImagePreprocessor:
     def createImagePreProcessingPipeline(self):
         logger.info(f"In function call createImagePreProcessingPipeline())")
         input_layer = self.preprocessor_layers.create_input_layer()
-        resize_layer = self.preprocessor_layers.create_resize_layer()
+        resize_layer = self.preprocessor_layers.create_resize_layer(self.target_height, self.target_width)
         rescale_layer = self.preprocessor_layers.create_rescale_layer()
         flip_layer = self.preprocessor_layers.create_flip_layer()
         rotation_layer = self.preprocessor_layers.create_rotation_layer()
