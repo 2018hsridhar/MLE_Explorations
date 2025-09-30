@@ -13,7 +13,7 @@ Image preprocessing pipeline using TensorFlow sequential layers
 Add layers to the sequential model during initialization
 
 Goals : 
-Properly format and augment images for ML model training
+Preprocessing, formatting, and augmentation of images for ML model training
 
 Best practices for image preprocessing:
 Always normalize pixel values to [0,1] or use standard normalization
@@ -33,21 +33,15 @@ class ImagePreprocessorLayers():
         self.model = Sequential(self.processing_layers + self.augmentation_layers, name="image_preprocessing_pipeline")
         self.name = "image_preprocessing_pipeline"
 
-    def createImagePreProcessingPipeline(self):
-        logger.info(f"In function call createImagePreProcessingPipeline())")
-        resize_layer = self.create_resize_layer()
-        rescale_layer = self.create_rescale_layer()
-        flip_layer = self.create_flip_layer()
-        rotation_layer = self.create_rotation_layer()
-        contrast_layer = self.create_contrast_layer()
-        zoom_layer = self.create_zoom_layer()
-        translation_layer = self.craete_random_translation_layer()
-        brightness_layer = self.create_random_brightness_layer()
-        self.processing_layers = [resize_layer, rescale_layer]
-        self.augmentation_layers = [flip_layer, rotation_layer, contrast_layer, zoom_layer, translation_layer, brightness_layer]
-        self.layers = self.processing_layers + self.augmentation_layers
-        self.model = Sequential(self.layers, name=self.name)
-        return self.model
+    def create_input_layer(self):
+        """
+        Create a TensorFlow input layer for images
+        # Input shape: (batch_size, height, width, channels)
+        # Variable batch size : any # of images
+        # Square images of 270×270 pixels
+        """
+        input_layer = tf.keras.Input(shape=(None,270, 270, 3), name='input_image')  # Height and width can be variable
+        return input_layer
 
     # TensorFlow layer for resizing images to 180x180x3
     def create_resize_layer(self):
@@ -128,7 +122,7 @@ class ImagePreprocessorLayers():
         )
         return zoom_layer
     
-    def craete_random_translation_layer(self):
+    def create_random_translation_layer(self):
         """
         Create a TensorFlow layer that randomly translates images
         Random translation is a common data augmentation technique to improve model generalization
@@ -156,37 +150,64 @@ class ImagePreprocessorLayers():
 class ImagePreprocessor:
     
     def __init__(self, target_height=224, target_width=224, augment=False):
+        self.numChannels = 3 # RGB
         self.target_height = target_height
         self.target_width = target_width
         self.augment = augment
+        self.preprocessor_layers = ImagePreprocessorLayers()
 
     # Load and decode image
-    def load_multi_format(path):
+    def loadMultiFormat(self, path):
         # Read image file
         rawImage = tf.io.read_file(path)
         
         # Decode image (JPEG, PNG, etc.)
-        numChannels = 3 # RGB   
         
         # Try to decode as different formats
         try:
             # Try JPEG first
-            image = tf.image.decode_jpeg(rawImage, channels=3)
-        except:
+            image = tf.image.decode_jpeg(rawImage, channels=self.numChannels)
+        except Exception as e:
+            logger.error(f"Error decoding JPEG image: {e}")
             try:
                 # Try PNG
-                image = tf.image.decode_png(rawImage, channels=3)
+                image = tf.image.decode_png(rawImage, channels=self.numChannels)
             except:
                 # Use generic decoder
-                image = tf.image.decode_image(rawImage, channels=3)
-        
-        # Ensure shape is set
-        image.set_shape([None, None, 3])
-        return image
+                try:
+                    image = tf.image.decode_image(rawImage, channels=self.numChannels)
+                except Exception as e:
+                    logger.error(f"Error decoding image: {e}")
+                    raise e
 
-    def preprocess_image(self, image):
-        model = self.createImagePreProcessingPipeline()
-        outputImage = model(image)
+        # Ensure shape is set
+        image.set_shape([self.target_width, self.target_height, self.numChannels])
+        return image
+    
+    # Combine layers based on whether augmentation is enabled
+    # Processing versus augmentation layers : the difference is that
+    # processing layers are always applied, while augmentation layers are only applied if augment=True
+    def createImagePreProcessingPipeline(self):
+        logger.info(f"In function call createImagePreProcessingPipeline())")
+        input_layer = self.preprocessor_layers.create_input_layer()
+        resize_layer = self.preprocessor_layers.create_resize_layer()
+        rescale_layer = self.preprocessor_layers.create_rescale_layer()
+        # flip_layer = self.preprocessor_layers.create_flip_layer()
+        # rotation_layer = self.preprocessor_layers.create_rotation_layer()
+        # contrast_layer = self.preprocessor_layers.create_contrast_layer()
+        # zoom_layer = self.preprocessor_layers.create_zoom_layer()
+        # translation_layer = self.preprocessor_layers.create_random_translation_layer()
+        # brightness_layer = self.preprocessor_layers.create_random_brightness_layer()
+        self.processing_layers = [input_layer, resize_layer, rescale_layer]
+        self.augmentation_layers = []
+        # self.augmentation_layers = [flip_layer, rotation_layer, contrast_layer, zoom_layer, translation_layer, brightness_layer]
+        self.layers = self.processing_layers + self.augmentation_layers
+        self.sequentialModel = Sequential(self.layers, name=self.name)
+        return self.sequentialModel
+
+    def preprocessImage(self, image):
+        imageSequentialModel = self.createImagePreProcessingPipeline()
+        outputImage = imageSequentialModel(image)
         return outputImage
 
     def createImagePreProcessingPipeline(self):
@@ -199,14 +220,14 @@ class ImagePreprocessor:
     def test_image_preprocessing(self):
         # Example image path
         # Load and preprocess image
-        image_path = "path/to/image.jpg"
-        loaded_image = self.load_multi_format(image_path)
-        processed_image = self.preprocess_image(loaded_image)
+        image_path = "../MACHINE_LEARNING_ENGINEERING_SIDE_PROJECTS/PREPROCESSING_STEPS/IMAGE_PROCESSING/IMAGES/doggo.jpg"
+        loaded_image = self.loadMultiFormat(image_path)
+        # processed_image = self.preprocessImage(loaded_image)
 
         # Display the image
-        plt.imshow(processed_image)
-        plt.axis('off')
-        plt.show()
+        plt.imshow(loaded_image)
+        # plt.axis('off')
+        # plt.show()
 
 def main():
     preprocessor = ImagePreprocessor(target_height=180, target_width=180, augment=True)
