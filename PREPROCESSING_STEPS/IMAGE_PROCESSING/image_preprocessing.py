@@ -15,7 +15,6 @@ Add layers to the sequential model during initialization
 Goals : 
 Properly format and augment images for ML model training
 
-
 Best practices for image preprocessing:
 Always normalize pixel values to [0,1] or use standard normalization
 Use tf.data.AUTOTUNE for parallel processing optimization
@@ -29,12 +28,26 @@ Handle different aspect ratios appropriately (pad vs. crop vs. stretch)
 class ImagePreprocessorLayers():
 
     def __init__(self):
+        self.processing_layers = []
+        self.augmentation_layers = []
+        self.model = Sequential(self.processing_layers + self.augmentation_layers, name="image_preprocessing_pipeline")
+        self.name = "image_preprocessing_pipeline"
 
-
-    def imagePreProcessingPipeline():
-        logger.info(f"Image preprocessing pipeline initiated.")
-        # for each image in dataset
-        # process each image
+    def createImagePreProcessingPipeline(self):
+        logger.info(f"In function call createImagePreProcessingPipeline())")
+        resize_layer = self.create_resize_layer()
+        rescale_layer = self.create_rescale_layer()
+        flip_layer = self.create_flip_layer()
+        rotation_layer = self.create_rotation_layer()
+        contrast_layer = self.create_contrast_layer()
+        zoom_layer = self.create_zoom_layer()
+        translation_layer = self.craete_random_translation_layer()
+        brightness_layer = self.create_random_brightness_layer()
+        self.processing_layers = [resize_layer, rescale_layer]
+        self.augmentation_layers = [flip_layer, rotation_layer, contrast_layer, zoom_layer, translation_layer, brightness_layer]
+        self.layers = self.processing_layers + self.augmentation_layers
+        self.model = Sequential(self.layers, name=self.name)
+        return self.model
 
     # TensorFlow layer for resizing images to 180x180x3
     def create_resize_layer(self):
@@ -76,189 +89,128 @@ class ImagePreprocessorLayers():
             name='random_flip'
         )
         return flip_layer
+    
+    def create_rotation_layer(self):
+        """
+        Create a TensorFlow layer that randomly rotates images
+        Random rotation is a common data augmentation technique to improve model generalization
+        """
+        rotation_layer = tf.keras.layers.RandomRotation(
+            factor=0.1,  # Rotation factor, e.g., 0.1 means +/- 10% of 2π radians
+            fill_mode='reflect',  # How to fill points outside boundaries: 'constant', 'reflect', 'wrap', 'nearest'
+            interpolation='bilinear',  # Interpolation method: 'nearest', 'bilinear', 'bicubic'
+            name='random_rotation'
+        )
+        return rotation_layer
+    
+    def create_contrast_layer(self):
+        """
+        Create a TensorFlow layer that randomly adjusts image contrast
+        Random contrast adjustment is a common data augmentation technique to improve model generalization
+        """
+        contrast_layer = tf.keras.layers.RandomContrast(
+            factor=0.1,  # Contrast adjustment factor, e.g., 0.1 means +/- 10% contrast change
+            name='random_contrast'
+        )
+        return contrast_layer
+    
+    def create_zoom_layer(self):
+        """
+        Create a TensorFlow layer that randomly zooms into images
+        Random zooming is a common data augmentation technique to improve model generalization
+        """
+        zoom_layer = tf.keras.layers.RandomZoom(
+            height_factor=0.1,  # Zoom factor for height, e.g., 0.1 means +/- 10% zoom
+            width_factor=0.1,   # Zoom factor for width, e.g., 0.1 means +/- 10% zoom
+            fill_mode='reflect',  # How to fill points outside boundaries: 'constant', 'reflect', 'wrap', 'nearest'
+            interpolation='bilinear',  # Interpolation method: 'nearest', 'bilinear', 'bicubic'
+            name='random_zoom'
+        )
+        return zoom_layer
+    
+    def craete_random_translation_layer(self):
+        """
+        Create a TensorFlow layer that randomly translates images
+        Random translation is a common data augmentation technique to improve model generalization
+        """
+        translation_layer = tf.keras.layers.RandomTranslation(
+            height_factor=0.1,  # Translation factor for height, e.g., 0.1 means +/- 10% translation
+            width_factor=0.1,   # Translation factor for width, e.g., 0.1 means +/- 10% translation
+            fill_mode='reflect',  # How to fill points outside boundaries: 'constant', 'reflect', 'wrap', 'nearest'
+            interpolation='bilinear',  # Interpolation method: 'nearest', 'bilinear', 'bicubic'
+            name='random_translation'
+        )
+        return translation_layer
+    
+    def create_random_brightness_layer(self):
+        """
+        Create a TensorFlow layer that randomly adjusts image brightness
+        Random brightness adjustment is a common data augmentation technique to improve model generalization
+        """
+        brightness_layer = tf.keras.layers.RandomBrightness(
+            factor=0.1,  # Brightness adjustment factor, e.g., 0.1 means +/- 10% brightness change
+            name='random_brightness'
+        )
+        return brightness_layer
 
-# Alternative: Using tf.image.resize function
-def resize_image_function(image, target_size=(180, 180)):
-    """
-    Resize image using tf.image.resize function
-    """
-    # Ensure image has 3 channels (RGB)
-    if len(image.shape) == 3 and image.shape[-1] != 3:
-        image = tf.image.grayscale_to_rgb(image) if image.shape[-1] == 1 else image
+class ImagePreprocessor:
     
-    # Resize image to target size
-    resized_image = tf.image.resize(
-        image, 
-        size=target_size, 
-        method='bilinear',  # Options: 'bilinear', 'nearest_neighbor', 'bicubic', 'area'
-        preserve_aspect_ratio=False,
-        antialias=False
-    )
-    
-    # Ensure output shape is (180, 180, 3)
-    resized_image = tf.ensure_shape(resized_image, [180, 180, 3])
-    
-    return resized_image
+    def __init__(self, target_height=224, target_width=224, augment=False):
+        self.target_height = target_height
+        self.target_width = target_width
+        self.augment = augment
 
-# Complete preprocessing model with resizing layer
-def create_preprocessing_model():
-    """
-    Create a complete preprocessing model with resizing to 180x180x3
-    """
-    model = tf.keras.Sequential([
-        # Resize layer
-        tf.keras.layers.Resizing(180, 180, name='resize_to_180x180'),
+    # Load and decode image
+    def load_multi_format(path):
+        # Read image file
+        rawImage = tf.io.read_file(path)
         
-        # Normalization layer (rescale to [0,1])
-        tf.keras.layers.Rescaling(1./255, name='normalize'),
+        # Decode image (JPEG, PNG, etc.)
+        numChannels = 3 # RGB   
         
-        # Optional: Data augmentation layers
-        tf.keras.layers.RandomFlip('horizontal', name='random_flip'),
-        tf.keras.layers.RandomRotation(0.1, name='random_rotation'),
-        tf.keras.layers.RandomZoom(0.1, name='random_zoom'),
-        tf.keras.layers.RandomContrast(0.1, name='random_contrast'),
-    ], name='image_preprocessing_180x180')
-    
-    return model
-
-# Example usage function
-def preprocess_image_to_180x180(image_path):
-    """
-    Complete image preprocessing pipeline to 180x180x3
-    """
-    # Load image
-    image = tf.io.read_file(image_path)
-    image = tf.image.decode_image(image, channels=3)
-    
-    # Convert to float32
-    image = tf.cast(image, tf.float32)
-    
-    # Resize to 180x180x3
-    image = resize_image_function(image, (180, 180))
-    
-    # Normalize to [0,1]
-    image = image / 255.0
-    
-    return image
-
-# Load and decode image
-def load_multi_format(path):
-    # Read image file
-    rawImage = tf.io.read_file(path)
-    
-    # Decode image (JPEG, PNG, etc.)
-    numChannels = 3 # RGB   
-      
-    # Try to decode as different formats
-    try:
-        # Try JPEG first
-        image = tf.image.decode_jpeg(rawImage, channels=3)
-    except:
+        # Try to decode as different formats
         try:
-            # Try PNG
-            image = tf.image.decode_png(rawImage, channels=3)
+            # Try JPEG first
+            image = tf.image.decode_jpeg(rawImage, channels=3)
         except:
-            # Use generic decoder
-            image = tf.image.decode_image(rawImage, channels=3)
-    
-    # Ensure shape is set
-    image.set_shape([None, None, 3])
-    return image
-
-def preprocess_image(image, target_height=224, target_width=224, augment=False):
-
-    # Define preprocessing layers
-    preprocessing_layers = tf.keras.Sequential()
-
-    # Resize layer
-
-
-
-
-    # Resize image
-    # image = tf.image.resize(image, [target_height, target_width])
-    # Convert to float32 and normalize to [0,1]
-    # image = tf.cast(image, tf.float32) / 255.0
-    # return image
-
-def test_image_preprocessing():
-    # Example image path
-    # Load and preprocess image
-    image_path = "path/to/image.jpg"
-    loaded_image = load_multi_format(image_path)
-    processed_image = preprocess_image(loaded_image, augment=True)
-
-    # Display the image
-    plt.imshow(processed_image)
-    plt.axis('off')
-    plt.show()
-
-# Example usage and testing for 180x180x3 resizing
-def demo_180x180_resizing():
-    """
-    Demonstrate different ways to resize images to 180x180x3
-    """
-    print("Creating TensorFlow layers for 180x180x3 image resizing...")
-    
-    # Method 1: Using Keras Resizing layer
-    resize_layer = create_resize_layer()
-    print(f"Created resize layer: {resize_layer.name}")
-    
-    # Method 2: Using preprocessing model
-    preprocessing_model = create_preprocessing_model()
-    print(f"Created preprocessing model with layers: {[layer.name for layer in preprocessing_model.layers]}")
-    
-    # Method 3: Create a simple model that just resizes
-    simple_resize_model = tf.keras.Sequential([
-        tf.keras.layers.Resizing(180, 180, name='resize_180x180x3'),
-        tf.keras.layers.Rescaling(1./255, name='normalize_0_1')
-    ], name='simple_180x180_resizer')
-    
-    # Example with dummy data
-    dummy_image = tf.random.uniform((1, 256, 256, 3), maxval=255, dtype=tf.float32)
-    print(f"Original image shape: {dummy_image.shape}")
-    
-    # Resize using the layer
-    resized_image = resize_layer(dummy_image)
-    print(f"Resized image shape (layer): {resized_image.shape}")
-    
-    # Resize using the preprocessing model
-    processed_image = preprocessing_model(dummy_image)
-    print(f"Processed image shape (model): {processed_image.shape}")
-    
-    # Resize using simple model
-    simple_resized = simple_resize_model(dummy_image)
-    print(f"Simple resized image shape: {simple_resized.shape}")
-    
-    return resize_layer, preprocessing_model, simple_resize_model
-
-# Dataset creation with 180x180x3 resizing
-def create_dataset_with_180x180_resize(image_paths, labels, batch_size=32):
-    """
-    Create a TensorFlow dataset that automatically resizes images to 180x180x3
-    """
-    def preprocess_path(image_path, label):
-        # Load and decode image
-        image = tf.io.read_file(image_path)
-        image = tf.image.decode_image(image, channels=3)
+            try:
+                # Try PNG
+                image = tf.image.decode_png(rawImage, channels=3)
+            except:
+                # Use generic decoder
+                image = tf.image.decode_image(rawImage, channels=3)
         
-        # Resize to 180x180x3
-        image = tf.image.resize(image, [180, 180])
-        
-        # Ensure shape and normalize
-        image = tf.cast(image, tf.float32) / 255.0
-        image = tf.ensure_shape(image, [180, 180, 3])
-        
-        return image, label
-    
-    # Create dataset
-    dataset = tf.data.Dataset.from_tensor_slices((image_paths, labels))
-    dataset = dataset.map(preprocess_path, num_parallel_calls=tf.data.AUTOTUNE)
-    dataset = dataset.batch(batch_size)
-    dataset = dataset.prefetch(tf.data.AUTOTUNE)
-    
-    return dataset
+        # Ensure shape is set
+        image.set_shape([None, None, 3])
+        return image
+
+    def preprocess_image(self, image):
+        model = self.createImagePreProcessingPipeline()
+        outputImage = model(image)
+        return outputImage
+
+    def createImagePreProcessingPipeline(self):
+        """
+        Create a TensorFlow image preprocessing pipeline
+        """
+        inputs = tf.keras.Input(shape=(self.target_height, self.target_width, 3))
+        x = inputs
+
+    def test_image_preprocessing(self):
+        # Example image path
+        # Load and preprocess image
+        image_path = "path/to/image.jpg"
+        loaded_image = self.load_multi_format(image_path)
+        processed_image = self.preprocess_image(loaded_image)
+
+        # Display the image
+        plt.imshow(processed_image)
+        plt.axis('off')
+        plt.show()
+
+def main():
+    preprocessor = ImagePreprocessor(target_height=180, target_width=180, augment=True)
+    preprocessor.test_image_preprocessing()
 
 if __name__ == "__main__":
-    # Run the demonstration
-    demo_180x180_resizing() 
+    main()
