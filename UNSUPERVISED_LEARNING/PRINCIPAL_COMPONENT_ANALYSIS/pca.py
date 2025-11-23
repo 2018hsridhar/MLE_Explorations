@@ -36,6 +36,7 @@ import matplotlib.pyplot as plt
 
 
 # Load Iris dataset with error handling and consistent variable types
+# Ientified fallback mechanisms for robust loading
 def load_iris_dataset():
     """
     Load Iris dataset with multiple fallback options
@@ -156,10 +157,6 @@ plt.tight_layout()
 # This helps in understanding how well PCA has captured the data structure
 # Since it corresponds to information content
 
-variance_explained = pca.explained_variance_ratio_
-first_pc_variance = variance_explained[0]
-second_pc_variance = variance_explained[1]
-
 # Explained variance ratio = eigenvalues / total variance
 # Each principal component has an associated eigenvalue
 # Eigenvalue indicates the amount of variance captured by that component
@@ -184,6 +181,16 @@ second_pc_variance = variance_explained[1]
 # explained_variance_ratio[3] = 0.3/5.0 = 0.06 (6%)
 
 explained_variance_ratio = pca.explained_variance_ratio_
+variance_explained = pca.explained_variance_ratio_
+first_pc_variance = variance_explained[0]
+second_pc_variance = variance_explained[1]
+VARIANCE_THRESHOLD = 0.95  # 95% variance threshold
+total_variance_explained = sum(explained_variance_ratio)
+if total_variance_explained >= VARIANCE_THRESHOLD:
+    print(f"PCA retained {total_variance_explained:.2%} variance, which meets the threshold of {VARIANCE_THRESHOLD:.2%}.")
+else:
+    print(f"PCA retained {total_variance_explained:.2%} variance, which is below the threshold of {VARIANCE_THRESHOLD:.2%}.")
+    
 plt.title('PCA of Iris Dataset')
 plt.legend()
 plt.show()
