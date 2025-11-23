@@ -9,10 +9,16 @@ from tensorflow import keras
 from tensorflow.keras import layers
 from tensorflow.keras.models import Sequential
 
+
 '''
 Description :
     Image preprocessing pipeline using TensorFlow sequential layers
     to build a sequnetial model. Add layers during its initialization.
+
+Libs :
+    Keras = high-level API for building and training deep learning models
+    TensorFlow = open-source ML framework for numerical computation
+    Sequential = Keras model type for stacking layers linearly
 
 Goals : 
     Preprocessing, formatting, and augmentation of images for ML model training
@@ -66,14 +72,15 @@ class ImagePreprocessorLayers:
         )
         return crop_layer
 
-    def create_input_layer(self, input_size):
+    def create_input_layer(self, input_size_width, input_size_height):
         """
         Create a TensorFlow input layer for images
-        # Input shape: (batch_size, height, width, channels)
+        # Input shape: (batch_size, height, width, channels) -> we are fixing the 
+        # height, width, and channels dimensions, but batch size is variable (None) of imgs
         # Variable batch size : any # of images
         # Variable height and width for input flexibility
         """
-        input_layer = tf.keras.Input(shape=(270,270,3), name='input_image')  # Height and width can be variable
+        input_layer = tf.keras.Input(shape=(input_size_height, input_size_width, 3), name='input_image')
         return input_layer
 
     # TensorFlow layer for resizing images to 180x180x3
@@ -232,11 +239,19 @@ class ImagePreprocessor:
         Combine layers based on whether augmentation is enabled
         Processing versus augmentation layers : the difference is that
         processing layers are always applied, while augmentation layers are only applied if augment=True
+    
+        Which layers to use and not use :
+
+        Always use:
+
+        Avoid :
+        - Using tf.keras.Input layer in Sequential models for preprocessing : it restricts input flexibility
+
     '''
-    def createImagePreProcessingPipeline(self, input_size=270, resize=180):
+    def createImagePreProcessingPipeline(self, input_size_width=270, input_size_height=270, resize_height=180, resize_width=180):
         logger.info(f"In function call createImagePreProcessingPipeline())")
-        input_layer = self.preprocessor_layers.create_input_layer()
-        # resize_layer = self.preprocessor_layers.create_resize_layer(self.target_height, self.target_width)
+        # input_layer = self.preprocessor_layers.create_input_layer(input_size_width, input_size_height)
+        resize_layer = self.preprocessor_layers.create_resize_layer(resize_height, resize_width)
         # rescale_layer = self.preprocessor_layers.create_rescale_layer()
         # flip_layer = self.preprocessor_layers.create_flip_layer()
         # rotation_layer = self.preprocessor_layers.create_rotation_layer()
@@ -244,14 +259,15 @@ class ImagePreprocessor:
         # zoom_layer = self.preprocessor_layers.create_zoom_layer()
         # translation_layer = self.preprocessor_layers.create_random_translation_layer()
         # brightness_layer = self.preprocessor_layers.create_random_brightness_layer()
-        self.processing_layers = [input_layer] #, resize_layer, rescale_layer]
+        self.processing_layers = [resize_layer] #, resize_layer, rescale_layer]
+        self.augmentation_layers = []  # Initialize empty list for now
         # self.augmentation_layers = [flip_layer, rotation_layer, contrast_layer, zoom_layer, translation_layer, brightness_layer]
         self.layers = self.processing_layers + self.augmentation_layers
         self.sequentialModel = Sequential(self.layers, name=self.name)
         return self.sequentialModel
 
-    def preprocessImage(self, image, input_size=270, resize=180):
-        imageSequentialModel = self.createImagePreProcessingPipeline(input_size, resize)
+    def preprocessImage(self, image, input_size_width=270, input_size_height=270, resize=180):
+        imageSequentialModel = self.createImagePreProcessingPipeline(input_size_width, input_size_height, resize)
         
         # Print model details
         print("\n" + "="*50)
@@ -272,7 +288,7 @@ class ImagePreprocessor:
             
         return outputImage
 
-    # def printModelDetails(self, model):
+    def printModelDetails(self, model):
         """
         Print details about the preprocessing model
         Print layer, layer names, input dims nad output dims
@@ -307,7 +323,9 @@ class ImagePreprocessor:
             # plt.show()
             
             # # Preprocess the image
-            processed_image = self.preprocessImage(loaded_image)
+            input_size_width = loaded_image.shape[1]
+            input_size_height = loaded_image.shape[0]
+            processed_image = self.preprocessImage(loaded_image, input_size_width=input_size_width, input_size_height=input_size_height)
             print(f"Processed image shape: {processed_image.shape}")
             print(f"Processed image value range: [{tf.reduce_min(processed_image):.3f}, {tf.reduce_max(processed_image):.3f}]")
             
