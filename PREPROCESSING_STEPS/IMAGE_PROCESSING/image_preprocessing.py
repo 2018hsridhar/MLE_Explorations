@@ -3,27 +3,36 @@ import tensorflow as tf
 import numpy as np
 import matplotlib.pyplot as plt
 
+
+import tensorflow as tf
 from tensorflow import keras
 from tensorflow.keras import layers
 from tensorflow.keras.models import Sequential
 
 '''
 Description :
-Image preprocessing pipeline using TensorFlow sequential layers
-Add layers to the sequential model during initialization
+    Image preprocessing pipeline using TensorFlow sequential layers
+    Add layers to the sequential model during initialization
 
 Goals : 
-Preprocessing, formatting, and augmentation of images for ML model training
-Model generalizability into the real world : test and validation.
+    Preprocessing, formatting, and augmentation of images for ML model training
+    Model generalizability into the real world : test and validation.
 
 Best practices for image preprocessing:
-Always normalize pixel values to [0,1] or use standard normalization
-Use tf.data.AUTOTUNE for parallel processing optimization
-Apply augmentation only to training data, not validation/test
-Cache datasets when possible to avoid repeated preprocessing
-Use prefetch to overlap data loading with model training
-Resize images consistently to match model input requirements
-Handle different aspect ratios appropriately (pad vs. crop vs. stretch)
+    Always normalize pixel values to [0,1] or use standard normalization
+    Use tf.data.AUTOTUNE for parallel processing optimization
+    Apply augmentation only to training data, not validation/test
+    Cache datasets when possible to avoid repeated preprocessing
+    Use prefetch to overlap data loading with model training
+    Resize images consistently to match model input requirements
+    Handle different aspect ratios appropriately (pad vs. crop vs. stretch)
+
+Why Sequential Model with multiple layers?
+    Seqmodel := 
+    Each Layer := 
+    Can add/remove layers dynamically
+
+
 '''
 
 class ImagePreprocessorLayers:
@@ -256,9 +265,10 @@ class ImagePreprocessor:
             
         return outputImage
 
-    def printModelDetails(self, model):
+    # def printModelDetails(self, model):
         """
         Print details about the preprocessing model
+        Print layer, layer names, input dims nad output dims
         """
         print(f"Model: {model.name}")
         print(f"Number of layers: {len(model.layers)}")
@@ -267,9 +277,9 @@ class ImagePreprocessor:
         try:
             model.summary()
         except:
-            print("Model summary not available - model may not be built yet")
+            print("Model summary not available - model may not be built yet. Please check if model built.")
 
-    def test_image_preprocessing(self):
+    # def test_image_preprocessing(self, testImageList):
         # Example image path
         image_path = "../MACHINE_LEARNING_ENGINEERING_SIDE_PROJECTS/PREPROCESSING_STEPS/IMAGE_PROCESSING/IMAGES/doggo.jpg"
         
@@ -311,8 +321,12 @@ class ImagePreprocessor:
             traceback.print_exc()
 
 def main():
-    preprocessor = ImagePreprocessor(target_height=180, target_width=180, augment=True)
-    preprocessor.test_image_preprocessing()
+    testHeight = 180
+    testWidth = 180
+    augmentStatus = True
+    imagePreprocessor = ImagePreprocessor(target_height=testHeight, target_width=testWidth, augment=augmentStatus)
+    testImageList = []
+    imagePreprocessor.test_image_preprocessing(testImageList)
 
 if __name__ == "__main__":
     main()
