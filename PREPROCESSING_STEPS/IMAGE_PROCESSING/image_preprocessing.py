@@ -12,7 +12,7 @@ from tensorflow.keras.models import Sequential
 '''
 Description :
     Image preprocessing pipeline using TensorFlow sequential layers
-    Add layers to the sequential model during initialization
+    to build a sequnetial model. Add layers during its initialization.
 
 Goals : 
     Preprocessing, formatting, and augmentation of images for ML model training
@@ -28,11 +28,13 @@ Best practices for image preprocessing:
     Handle different aspect ratios appropriately (pad vs. crop vs. stretch)
 
 Why Sequential Model with multiple layers?
-    Seqmodel := 
-    Each Layer := 
-    Can add/remove layers dynamically
+    Sequential model allows easy stacking of preprocessing layers
+    Each layer performs a specific transformation (resize, rescale, augment)
+    Easy to modify the pipeline by adding/removing layers as needed
+    Clear separation between processing layers and augmentation layers
 
-
+Viewing model details:
+    Print layer names, input/output dimensions
 '''
 
 class ImagePreprocessorLayers:
@@ -223,28 +225,33 @@ class ImagePreprocessor:
         image = tf.cast(image, tf.float32)
         return image
     
-    # Combine layers based on whether augmentation is enabled
-    # Processing versus augmentation layers : the difference is that
-    # processing layers are always applied, while augmentation layers are only applied if augment=True
-    def createImagePreProcessingPipeline(self):
+
+    '''
+        input_size: original input image size (height and width)
+        resize: target resize dimensions (height and width)
+        Combine layers based on whether augmentation is enabled
+        Processing versus augmentation layers : the difference is that
+        processing layers are always applied, while augmentation layers are only applied if augment=True
+    '''
+    def createImagePreProcessingPipeline(self, input_size=270, resize=180):
         logger.info(f"In function call createImagePreProcessingPipeline())")
         input_layer = self.preprocessor_layers.create_input_layer()
-        resize_layer = self.preprocessor_layers.create_resize_layer(self.target_height, self.target_width)
-        rescale_layer = self.preprocessor_layers.create_rescale_layer()
-        flip_layer = self.preprocessor_layers.create_flip_layer()
-        rotation_layer = self.preprocessor_layers.create_rotation_layer()
-        contrast_layer = self.preprocessor_layers.create_contrast_layer()
-        zoom_layer = self.preprocessor_layers.create_zoom_layer()
-        translation_layer = self.preprocessor_layers.create_random_translation_layer()
-        brightness_layer = self.preprocessor_layers.create_random_brightness_layer()
-        self.processing_layers = [input_layer, resize_layer, rescale_layer]
-        self.augmentation_layers = [flip_layer, rotation_layer, contrast_layer, zoom_layer, translation_layer, brightness_layer]
+        # resize_layer = self.preprocessor_layers.create_resize_layer(self.target_height, self.target_width)
+        # rescale_layer = self.preprocessor_layers.create_rescale_layer()
+        # flip_layer = self.preprocessor_layers.create_flip_layer()
+        # rotation_layer = self.preprocessor_layers.create_rotation_layer()
+        # contrast_layer = self.preprocessor_layers.create_contrast_layer()
+        # zoom_layer = self.preprocessor_layers.create_zoom_layer()
+        # translation_layer = self.preprocessor_layers.create_random_translation_layer()
+        # brightness_layer = self.preprocessor_layers.create_random_brightness_layer()
+        self.processing_layers = [input_layer] #, resize_layer, rescale_layer]
+        # self.augmentation_layers = [flip_layer, rotation_layer, contrast_layer, zoom_layer, translation_layer, brightness_layer]
         self.layers = self.processing_layers + self.augmentation_layers
         self.sequentialModel = Sequential(self.layers, name=self.name)
         return self.sequentialModel
 
-    def preprocessImage(self, image):
-        imageSequentialModel = self.createImagePreProcessingPipeline()
+    def preprocessImage(self, image, input_size=270, resize=180):
+        imageSequentialModel = self.createImagePreProcessingPipeline(input_size, resize)
         
         # Print model details
         print("\n" + "="*50)
@@ -279,54 +286,83 @@ class ImagePreprocessor:
         except:
             print("Model summary not available - model may not be built yet. Please check if model built.")
 
-    # def test_image_preprocessing(self, testImageList):
-        # Example image path
-        image_path = "../MACHINE_LEARNING_ENGINEERING_SIDE_PROJECTS/PREPROCESSING_STEPS/IMAGE_PROCESSING/IMAGES/doggo.jpg"
-        
+    def test_image_preprocessing_pipeline(self, testImageList):
+        print(f"In function call test_image_preprocessing_pipeline() with {len(testImageList)} images")
+        for testImagePath in testImageList:
+            print(f"Processing image: {testImagePath}")
+            self._process_single_image(testImagePath)
+
+    def _process_single_image(self, image_path):
         try:
             # Load and preprocess image
             print(f"Loading image from: {image_path}")
             loaded_image = self.loadMultiFormat(image_path)
             print(f"Original image shape: {loaded_image.shape}")
+
+            # Display the original image
+            # plt.figure(figsize=(5, 5))
+            # plt.imshow(tf.cast(loaded_image, tf.uint8))
+            # plt.title('Original Image')
+            # plt.axis('off')
+            # plt.show()
             
             # # Preprocess the image
             processed_image = self.preprocessImage(loaded_image)
             print(f"Processed image shape: {processed_image.shape}")
             print(f"Processed image value range: [{tf.reduce_min(processed_image):.3f}, {tf.reduce_max(processed_image):.3f}]")
             
-            # Display the processed image
+            # Display the original and the processed image side-by-side
+            SCALE_FACTOR = 255.0
             plt.figure(figsize=(10, 5))
-            plt.subplot(1, 2, 1)
+            plt.subplot(1, 2, 1) # dimensions = rows, cols, index
+            # Cast to uint8 for correct color rendering because image data is in float32
+            # and matplotlib expects uint8 for proper display ( 0-255 pixel values ) 
+            # when using imshow
             plt.imshow(tf.cast(loaded_image, tf.uint8))
             plt.title('Original Image')
+            # Turn off axis labels because they are not needed for image display
             plt.axis('off')
-            
-            plt.tight_layout()
-            plt.show()
+            plt.subplot(1, 2, 2)
+             # Scale back to [0,255] for display and convert to uint8 for correct color rendering
+             # Why scaling back? Because processed_image is in [0,1] range after rescaling
+             # Multiplying by 255 converts it back to standard pixel range for visualization
+             # Casting to uint8 ensures proper color representation in matplotlib
+            # plt.imshow(tf.cast(processed_image * SCALE_FACTOR, tf.uint8))
+            plt.imshow(tf.cast(processed_image, tf.uint8))
+            plt.title('Processed Image')
+            plt.axis('off')
+            plt.show()  
             
         except FileNotFoundError:
             print(f"Image file not found: {image_path}")
-            print("Testing with dummy data instead...")
+            # print("Testing with dummy data instead...")
             
-            # Create dummy image data
-            dummy_image = tf.random.uniform((427, 640, 3), maxval=255, dtype=tf.float32)
-            print(f"Dummy image shape: {dummy_image.shape}")
+            # # Create dummy image data
+            # dummy_image = tf.random.uniform((427, 640, 3), maxval=255, dtype=tf.float32)
+            # print(f"Dummy image shape: {dummy_image.shape}")
             
-            processed_image = self.preprocessImage(dummy_image)
-            print(f"Processed dummy image shape: {processed_image.shape}")
-            print(f"Processed image value range: [{tf.reduce_min(processed_image):.3f}, {tf.reduce_max(processed_image):.3f}]")
+            # processed_image = self.preprocessImage(dummy_image)
+            # print(f"Processed dummy image shape: {processed_image.shape}")
+            # print(f"Processed image value range: [{tf.reduce_min(processed_image):.3f}, {tf.reduce_max(processed_image):.3f}]")
         except Exception as e:
             print(f"Error during image processing: {e}")
             import traceback
             traceback.print_exc()
 
 def main():
+    # Target height, width for image resizing in units of pixels
+    # A MacBookPro 14-inch monitor has resolution 3024 x 1964 pixelskm
     testHeight = 180
-    testWidth = 180
+    testWidth = 180 
     augmentStatus = True
-    imagePreprocessor = ImagePreprocessor(target_height=testHeight, target_width=testWidth, augment=augmentStatus)
+    imageParentPath = "../MACHINE_LEARNING_ENGINEERING_SIDE_PROJECTS/PREPROCESSING_STEPS/IMAGE_PROCESSING/IMAGES/"
+    targetImages = ["doggo.jpg"]
     testImageList = []
-    imagePreprocessor.test_image_preprocessing(testImageList)
+    for targetImage in targetImages:
+        image_path = imageParentPath + targetImage
+        testImageList.append(image_path)
+    imagePreprocessor = ImagePreprocessor(target_height=testHeight, target_width=testWidth, augment=augmentStatus)
+    imagePreprocessor.test_image_preprocessing_pipeline(testImageList)
 
 if __name__ == "__main__":
     main()
