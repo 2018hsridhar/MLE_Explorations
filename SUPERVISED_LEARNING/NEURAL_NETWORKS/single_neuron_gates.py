@@ -2,8 +2,10 @@
 Single Neuron Binary Classification: AND & OR Gates
 ==================================================
 
-Train a single neuron perceptron to learn AND and OR logical gates.
-Focus on binary classification.
+Train a single neuron to learn weights and biases 
+for binary classification of inputs from circuit logical gates : AND and OR
+Focus on binary classification because it's a classic example
+and easy to visualize.
 
 Key Concepts:
 - Single perceptron (neuron) with sigmoid activation

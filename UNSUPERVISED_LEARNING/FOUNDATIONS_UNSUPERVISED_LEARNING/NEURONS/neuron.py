@@ -1,12 +1,16 @@
 '''
+Project background ( neuron.py ) : 
+Emualte classic examples of single neuron binary classification
+The AND and OR gate examples for a singel binary classification neuron.
+Implement mini-batch gradient descent for training.
+Single neuron models are linear models.
+
 NN Notes :
 - operate on non-linear data.
 - it is supervised learning
 - specializations needed on Perceptron?
 - (sigmoid(sum(inputs*weights + bias)) = output)
 - sigmoid(weight*feature + bias ) = prediction
-
-
 
 No regularization ( huh )?
 Use sigmoid activation func.
@@ -17,7 +21,7 @@ sigma : non-linear func
     sigma(summation) => output
 ( single bias, multiple features )
 
-Test scoping :
+wTest scoping :
 a. does the model generalize well to non-training data?
 b.
 c.
