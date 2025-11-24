@@ -36,7 +36,7 @@ How well did we explain our variance? The goal of a high R^2 term.
 
 '''
 
-''''''
+'''
 Creating mock template code for simple ML models:
 These models are well suited for linear tasks, and encompass linear regression, logistic regression, and NB : Naive Bayes
 Simpler ML models tend to be supervised learning ( versus unsupervised learning or reinforcement learning ).
