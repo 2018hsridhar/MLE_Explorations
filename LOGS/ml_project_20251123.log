@@ -1,0 +1,5 @@
+2025-11-23 20:27:38,346 - __main__ - INFO - twoDimLinearRegression.py:52 - In function call executeTwoDimLinearRegression(): Starting ML Linear Regression Dataset analysis.
+2025-11-23 20:27:45,479 - __main__ - INFO - twoDimLinearRegression.py:99 - Linear Regression : Mean Absolute Error: 0.8912563918016556
+2025-11-23 20:27:45,479 - __main__ - INFO - twoDimLinearRegression.py:100 - Linear Regression : Mean Squared Error: 1.2253234074362016
+2025-11-23 20:27:45,479 - __main__ - INFO - twoDimLinearRegression.py:101 - Linear Regression : R^2 Score: -0.30900520829476896
+2025-11-23 20:27:45,479 - __main__ - WARNING - twoDimLinearRegression.py:104 - R^2 Score is below threshold: 0.8
