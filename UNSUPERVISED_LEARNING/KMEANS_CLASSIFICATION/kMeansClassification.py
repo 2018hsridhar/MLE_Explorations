@@ -29,13 +29,13 @@ References :
 - https://en.wikipedia.org/wiki/K-means_clustering
 
 '''
+from collections import defaultdict
 import random
 
 
 class Centroid:
     def __init__(self, location):
         self.location = location
-        self.closest_users = set()
 
 def create_random_user_map(num_users=100, num_features_per_user=4, rand_lower=0, rand_upper=100):
     print(f"Creating random user-feature map with {num_users} users, each having {num_features_per_user} features.")
@@ -45,20 +45,59 @@ def create_random_user_map(num_users=100, num_features_per_user=4, rand_lower=0,
         user_feature_map[user_id] = features
     return user_feature_map, num_features_per_user
 
-def get_k_means(user_feature_map, num_features_per_user, k, numIterations=100, distanceNorm=2):
+def l2Norm(feature1, feature2, norm=2):
+    """Calculate the L2 norm (Euclidean distance) between two feature vectors."""
+    if len(feature1) != len(feature2):
+        raise ValueError("Feature vectors must be of the same length.")
+    distance = sum((a - b) ** norm for a, b in zip(feature1, feature2)) ** (1/norm)
+    return distance
+
+def get_k_means(user_feature_map, num_features_per_user, targetNumberCentroids, numIterations=100, distanceNorm=2):
     # Don't change the following two lines of code.
     RANDOM_INIT = 42
+    k = targetNumberCentroids
     random.seed(RANDOM_INIT)
     # Gets the inital users, to be used as centroids.
-    inital_centroid_users = random.sample(sorted(list(user_feature_map.keys())), k)
-    # [1] Assignment step
+    userKeys = sorted(list(user_feature_map.keys()))
+    kKeySample = random.sample(userKeys, k)
+    inital_centroids = [Centroid(user_feature_map[key]) for key in kKeySample]
+    centroids = inital_centroids
+    ZERO_LOC = [0.0] * num_features_per_user
     for iteration in range(numIterations):
         print(f"\n--- K-Means Iteration {iteration + 1} / {numIterations} ---")
-        
+        # [1] Assignment step
+        centroid_assignments = defaultdict(list)
+        for user_id, userFeature in user_feature_map.items():
+            closestCentroidDistance= float('-inf')
+            closestCentroidIndex = -1
+            for centroidIndex, centroid in enumerate(centroids):
+                # Calculate distance between user features and centroid location
+                distance = l2Norm(userFeature, centroid.location, distanceNorm)
+                if closestCentroidIndex == -1 or distance < closestCentroidDistance:
+                    closestCentroidDistance = distance
+                    closestCentroidIndex = centroidIndex
+            # Assign user to closest centroid
+            centroid_assignments[closestCentroidIndex].append(user_id)
 
 
-    # Write your code here.
-    pass
+        # [2] Update/Refitting step
+        # CEntroid assignments : 1 -> [ userID1, userID2, ... ], 2 -> [ userID3, userID4, ... ]
+        new_centroid_locations = [Centroid(ZERO_LOC) for key in kKeySample]
+        for centroidIndex, assignedUserIDs in centroid_assignments.items():
+            # Calculate new centroid location as mean of assigned user features
+            new_centroid_location = ZERO_LOC
+            for candid_user_id in assignedUserIDs:
+                candid_user_features = user_feature_map[candid_user_id]
+                for featureIndex in range(num_features_per_user):
+                    new_centroid_location[featureIndex] += candid_user_features[featureIndex]
+            # Average the sum to get the mean
+            for featureIndex in range(num_features_per_user):
+                new_centroid_location[featureIndex] /= len(assignedUserIDs)
+            new_centroid_locations[centroidIndex] = Centroid(new_centroid_location)
+        # Update centroids with new locations
+        for centroidIndex, new_centroid_location in enumerate(new_centroid_locations):
+            centroids[centroidIndex].location = new_centroid_locations[centroidIndex].location
+    return centroids
 
 def main():
     print(f"\n{'='*20} K-Means Clustering Algorithm {'='*20}\n")
@@ -70,10 +109,10 @@ def main():
     numTargetClusters = 3
     
     # # Get initial centroids
-    centroids = get_k_means(user_feature_map, num_features_per_user, numTargetClusters, numIterations=100)
+    centroids = get_k_means(user_feature_map, num_features_per_user, numTargetClusters, numIterations=10)
     
     # # Print centroid locations
-    # for idx, centroid in enumerate(centroids):
-    #     print(f"Centroid {idx}: Location {centroid.location}")
+    for idx, centroid in enumerate(centroids):
+        print(f"Centroid {idx}: Location {centroid.location}")
 
 main()
