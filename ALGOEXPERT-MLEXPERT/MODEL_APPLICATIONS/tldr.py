@@ -17,7 +17,6 @@ ROUGE evals summary
 
 https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.TfidfVectorizer.html
 https://www.nltk.org/
-
 '''
 
 
@@ -54,11 +53,13 @@ def tldr(text_to_summarize):
     # top X percentage ( 50% original doc)
     sentence_with_scores.sort(key=lambda x: x[1], reverse=True)
 
-    max_frac = 0.25 # bound here
+    max_frac = 0.30 # bound here
     num_sentences_to_pick = max(1, int(len(cleaned_sentences) * max_frac))
 
-    # how to improve the Rouge-L f-score?
+    # Cleaning destroys context
+    # Revert back to original sentences now
     top_sentences = sentence_with_scores[:num_sentences_to_pick]
-    just_sentences = [x[0] for x in top_sentences]
-    executiveSummary = "".join(just_sentences)
+    sentence_map = dict(zip(cleaned_sentences, sentences))
+    just_sentences = [sentence_map[x[0]] for x in top_sentences]
+    executiveSummary = " ".join(just_sentences)
     return executiveSummary
